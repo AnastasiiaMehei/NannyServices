@@ -1,0 +1,14 @@
+/* colour variables */
+body {
+  --primary-color-white: #fbfbfb;
+  --primary-color-red: #f03f3b;
+  --primary-color-red-background: rgba(240, 63, 59, 0.2);
+  --primary-color-blue: #0957c3;
+  --primary-color-blue-background: rgba(9, 87, 195, 0.2);
+  --primary-color-green: #103931;
+  --primary-color-green-background: rgba(16, 57, 49, 0.2);
+  --primary-color-grey: rgba(17, 16, 28, 0.5);
+  --primary-color-black:  #11101c;
+
+
+}

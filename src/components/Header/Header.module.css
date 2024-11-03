@@ -1,0 +1,71 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1184px;
+    height: 48px;
+    border: none;
+    background: transparent;
+    position: relative;
+
+}
+.logo {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.16667;
+    letter-spacing: -0.02em;
+}
+.navigationDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 92px;
+}
+.navigation {
+    width: 141px;
+height: 20px;
+    display: flex;
+flex-direction: row;  
+justify-content: space-between;  
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+.btn {
+    width: 300px;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+font-weight: 500;
+line-height: 1.25;
+letter-spacing: -0.01em;
+background-color: transparent;
+}
+.logIn {
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    border-radius: 30px;
+    padding: 14px 39px;
+    width: 124px;
+    height: 48px;
+    background-color: transparent;
+}
+.registration {
+    border-radius: 30px;
+    padding: 14px 40px;
+    width: 168px;
+    height: 48px;
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    background-color: transparent;
+
+}
+.registration:hover {
+    background: var(--primary-color-red);
+border: none;
+color: var(--primary-color-white);
+}
+.logIn:hover {
+    background: var(--primary-color-red);
+    border: none;
+    color: var(--primary-color-white);
+
+}
