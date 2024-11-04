@@ -2,7 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 1184px;
+    /* width: 1184px; */
+    width: 1247px;
     height: 48px;
     border: none;
     background: transparent;
@@ -67,5 +68,4 @@ color: var(--primary-color-white);
     background: var(--primary-color-red);
     border: none;
     color: var(--primary-color-white);
-
 }
