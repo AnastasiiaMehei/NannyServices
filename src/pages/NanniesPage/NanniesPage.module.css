@@ -1,4 +1,23 @@
-/* .icon {|
-width: 12px;
-height: 8px;
-} */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.loadMoreDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+.loadMoreBtn {
+    border-radius: 30px;
+    padding: 14px 40px;
+    width: 159px;
+    height: 48px;
+    background: var(--primary-color-red);
+font-weight: 500;
+font-size: 16px;
+line-height: 1.25;
+letter-spacing: -0.01em;
+color: var(--primary-color-white);
+border: none;
+}

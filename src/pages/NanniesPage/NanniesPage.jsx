@@ -1,23 +1,20 @@
 // import css from './NanniesPage.module.css'
 
 // import Header from "../../components/Header/Header";
-import sprite from "../../images/icons-sprite.svg";
 
-import css from "./HomePage.module.css";
+import FilterNannies from "../../components/FilterNannies/FilterNannies";
+import NannyCard from "../../components/NannyCard/NannyCard";
+import css from "./NanniesPage.module.css";
 
 export default function NanniesPage () {
     return (
         <div className={css.wrapper}>
-            {/* <div  className={css.header}>
-                <Header/>
-            </div> */}
-<div>
-    <p>Filters</p>
-    <button type="button">A to Z</button>
-    <svg className={css.icon}>
-                <use xlinkHref={`${sprite}#icon-down`}></use>
-              </svg>
-</div>
+         <FilterNannies/>
+        <div className={css.loadMoreDiv}>
+        <NannyCard/>
+
+        <button className={css.loadMoreBtn} type="button">Load more </button>
+        </div>
         </div>
     )
 }
