@@ -12,7 +12,9 @@ display: flex;
     display: flex;
     flex-direction: column;
     gap: 49px;
+    width: 438px;
 }
+
 .closeBtn {
     position: relative;
 }
@@ -21,8 +23,8 @@ display: flex;
     height: 20px;
     stroke:var(--primary-color-black);
     position: absolute;
-    top: -4%;
-    left: 566px;
+    top: -9%;
+    left: 404px
 }
 .registrationParagraphDiv {
 display: flex;
@@ -77,11 +79,18 @@ display: flex;
 .inputs {
     border: 1px solid rgba(17, 16, 28, 0.1);
 border-radius: 12px;
-padding: 16px 377px 16px 18px;
+padding: 16px 261px 16px 18px;}
+.eye {
+    position: relative;
+
 }
-.icon-eye-off{
+.iconEyeOff{
     width: 20px;
     height: 16px;
-    fill: #11101c;
+    fill: var(--primary-color-white);
+    stroke: var(--primary-color-black);
+    position: absolute;
+    top: 61%;
+    left: 78%;
 
 }

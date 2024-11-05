@@ -4,7 +4,6 @@
 
 import FilterNannies from "../../components/FilterNannies/FilterNannies";
 import Header from "../../components/Header/Header";
-import LogInModal from "../../components/LogInModal/LogInModal";
 import NannyCard from "../../components/NannyCard/NannyCard";
 import css from "./NanniesPage.module.css";
 
@@ -22,7 +21,6 @@ export default function NanniesPage () {
         <button className={css.loadMoreBtn} type="button">Load more </button>
         </div>
        </div>
-       <LogInModal/>
         </div>
     )
 }

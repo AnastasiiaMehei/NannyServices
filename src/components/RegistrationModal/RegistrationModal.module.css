@@ -1,0 +1,96 @@
+.wrapper {
+    border-radius: 30px;
+    width: 565px;
+    background: var(--primary-color-white);
+/* background: fuchsia; */
+padding: 47px 35px;position: relative;
+display: flex;
+    justify-content: center;
+
+}
+.mainInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 49px;
+    width: 438px;
+}
+
+.closeBtn {
+    position: relative;
+}
+.iconClose {
+    width: 20px;
+    height: 20px;
+    stroke:var(--primary-color-black);
+    position: absolute;
+    top: -9%;
+    left: 404px
+}
+.registrationParagraphDiv {
+display: flex;
+flex-direction: column;
+gap: 20px;
+text-align: justify;
+}
+.registrationParagraph {
+    font-family: "Helvetica Neue", sans-serif;
+font-weight: 500;
+font-size: 40px;
+line-height: 1.2;
+letter-spacing: -0.02em;
+color: var(--primary-color-black);
+}
+.registrationParagraphDescription {
+font-size: 16px;
+line-height: 1.25;
+color: var(--primary-color-grey);
+}
+.btnDiv {
+    display: flex;
+    justify-content: center;
+}
+.btn {
+    border-radius: 30px;
+    padding: 16px 190px;
+    width: 438px;
+    height: 52px;
+    background: var(--primary-color-red); 
+font-weight: 500;
+font-size: 16px;
+line-height: 1.25;
+letter-spacing: -0.01em;
+color: var(--primary-color-white);
+display: flex;
+align-items: center;
+justify-content: center;
+border: none;
+}
+
+/* form */
+.form {
+    width: 438px;
+display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.inputsDiv {
+
+}
+.inputs {
+    border: 1px solid rgba(17, 16, 28, 0.1);
+border-radius: 12px;
+padding: 16px 261px 16px 18px;}
+.eye {
+    position: relative;
+
+}
+.iconEyeOff{
+    width: 20px;
+    height: 16px;
+    fill: var(--primary-color-white);
+    stroke: var(--primary-color-black);
+    position: absolute;
+    top: 61%;
+    left: 78%;
+
+}

@@ -32,20 +32,11 @@ export default function LogInModal () {
         </div>
         <div className={css.mainInfo}>
             <div className={css.registrationParagraphDiv}>
-                <p className={css.registrationParagraph}>Registration</p>
-                <p className={css.registrationParagraphDescription}>Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information.</p>
+                <p className={css.registrationParagraph}>Log In</p>
+                <p className={css.registrationParagraphDescription}>Welcome back! Please enter your credentials to access your account and continue your babysitter search.</p>
             </div>
             <div >
             <form onSubmit={handleSubmit(onSubmit)} className={css.form} >
-        <div >
-          <input 
-            type="text"
-            placeholder="Name"
-            {...register('name')}
-            className={css.inputs}
-          />
-          {errors.name && <p className={css.error}>{errors.name.message}</p>}
-        </div>
         <div>
           <input
             type="email"
@@ -60,9 +51,9 @@ export default function LogInModal () {
             type="password"
             placeholder="Password"
             {...register('password')}
-            className={css.inputs}
+            className={`${css.inputs} ${css.eye}`}
           />
-               <svg className={css.iconLocation}>
+               <svg className={css.iconEyeOff}>
                 <use xlinkHref={`${sprite}#icon-eye-off`}></use>
               </svg>
           {errors.password && <p className={css.error}>{errors.password.message}</p>}

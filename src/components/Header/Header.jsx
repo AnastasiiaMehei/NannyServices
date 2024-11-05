@@ -1,7 +1,28 @@
 import { NavLink } from 'react-router-dom';
-
+import { useState } from 'react';
+import RegistrationModal from '../RegistrationModal/RegistrationModal'
+import LogInModal from '../LogInModal/LogInModal'
 import css from './Header.module.css'
 export default function Header () {
+    const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
+    const [isLogInModalOpen, setIsLogInModalOpen] = useState(false);
+  
+    const handleOpenRegistrationModal = () => {
+      setIsRegistrationModalOpen(true);
+    };
+  
+    const handleCloseRegistrationModal = () => {
+      setIsRegistrationModalOpen(false);
+    };
+  
+    const handleOpenLogInModal = () => {
+      setIsLogInModalOpen(true);
+    };
+  
+    const handleCloseLogInModal = () => {
+      setIsLogInModalOpen(false);
+    };
+  
     return (
         <div className={css.wrapper}>
             <div>
@@ -17,12 +38,21 @@ export default function Header () {
                 </NavLink>
             </div>
             <div className={css.btn}>
-                <button type='button' className={css.logIn}> Log In
-                    </button>
-                    <button type='button' className={css.registration} > Registration</button>
+            <button type='button' className={css.logIn} onClick={handleOpenLogInModal}>
+            Log In
+          </button>
+          <button type='button' className={css.registration} onClick={handleOpenRegistrationModal}>
+            Registration
+          </button>
             </div>
             </div>
-            
+            {isRegistrationModalOpen && (
+        <RegistrationModal onClose={handleCloseRegistrationModal} />
+      )}
+
+      {isLogInModalOpen && (
+        <LogInModal onClose={handleCloseLogInModal} />
+      )}
         </div>
     )
 }
