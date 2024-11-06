@@ -45,7 +45,7 @@ background-color: transparent;
 .logIn {
     border: 1px solid rgba(251, 251, 251, 0.4);
     border-radius: 30px;
-    padding: 14px 39px;
+    /* padding: 14px 39px; */
     width: 124px;
     height: 48px;
     background-color: transparent;

@@ -1,7 +1,10 @@
 
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { registerUser } from '../../services/authService';
 
 import sprite from "../../images/icons-sprite.svg";
 import css from "./RegistrationModal.module.css";
@@ -20,10 +23,16 @@ export default function RegistrationModal () {
       } = useForm({
         resolver: yupResolver(schema),
       });
-    
-      const onSubmit = (data) => {
-        console.log(data);
-        // Виклик функції реєстрації або логінізації
+      const navigate = useNavigate(); 
+
+      const onSubmit = async (data) => {
+        try {
+          await registerUser(data.email, data.password);
+          onClose(); 
+          navigate('/nannies');
+        } catch (error) {
+          console.error("Registration failed:", error);
+        }
       };
     return (
         <div className={css.wrapper}>

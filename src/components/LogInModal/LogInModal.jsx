@@ -1,16 +1,19 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
+
 import * as yup from 'yup';
+import { loginUser } from '../../services/authService'; 
+
 
 import sprite from "../../images/icons-sprite.svg";
 import css from "./LogInModal.module.css";
 
 const schema = yup.object().shape({
-    name: yup.string().required('Name is required'),
     email: yup.string().email('Invalid email format').required('Email is required'),
     password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
   });
-export default function LogInModal () {
+export default function LogInModal ({ onClose }) {
     const {
         register,
         handleSubmit,
@@ -18,10 +21,15 @@ export default function LogInModal () {
       } = useForm({
         resolver: yupResolver(schema),
       });
-    
-      const onSubmit = (data) => {
-        console.log(data);
-        // Виклик функції реєстрації або логінізації
+      const navigate = useNavigate();
+      const onSubmit = async (data) => {
+        try {
+          await loginUser(data.email, data.password);
+          onClose();
+          navigate('/nannies');
+        } catch (error) {
+          console.error("Login failed:", error);
+        }
       };
     return (
         <div className={css.wrapper}>
@@ -62,7 +70,7 @@ export default function LogInModal () {
       </form>
             </div>
             <div className={css.btnDiv}>
-          <button className={css.btn} type="submit">Sign Up</button>
+          <button className={css.btn} type="submit">Log in</button>
         </div>
         </div>
         </div>

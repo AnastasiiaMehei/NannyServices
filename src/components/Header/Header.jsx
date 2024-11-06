@@ -22,7 +22,14 @@ export default function Header () {
     const handleCloseLogInModal = () => {
       setIsLogInModalOpen(false);
     };
-  
+    const handleLogout = async () => {
+        try {
+          await logoutUser();
+          console.log("User logged out");
+        } catch (error) {
+          console.error("Logout failed:", error);
+        }
+      };
     return (
         <div className={css.wrapper}>
             <div>
@@ -43,6 +50,9 @@ export default function Header () {
           </button>
           <button type='button' className={css.registration} onClick={handleOpenRegistrationModal}>
             Registration
+          </button>
+          <button type='button' className={css.logIn} onClick={handleOpenRegistrationModal}>
+            Log out
           </button>
             </div>
             </div>
