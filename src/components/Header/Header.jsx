@@ -1,14 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { auth } from "../../services/firebase"; 
 import { logoutUser } from '../../services/authService'; // Імпортуйте logoutUser з authService.js
-
 import { useEffect, useState } from "react";
-
 import UserMenu from "../../components/UserMenu/UserMenu.jsx";
 import { AuthNav } from "../../components/AuthNav/AuthNav.jsx";
 import LogInModal from "../../components/LogInModal/LogInModal";
 import RegistrationModal from "../../components/RegistrationModal/RegistrationModal";
 import { ToastContainer, toast } from "react-toastify";
+import ThemeContext from '../../components/ThemeContext/ThemeContext.jsx'
 import "react-toastify/dist/ReactToastify.css";
 import css from "./Header.module.css";
 export default function Header() {
@@ -53,6 +52,7 @@ export default function Header() {
 
   return (
     <div className={css.wrapper}>
+      <ThemeContext/>
       <div>
         <a className={css.logo}>Nanny.Services</a>
       </div>
