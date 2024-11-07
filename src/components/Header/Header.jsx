@@ -1,68 +1,94 @@
-import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
-import RegistrationModal from '../RegistrationModal/RegistrationModal'
-import LogInModal from '../LogInModal/LogInModal'
-import css from './Header.module.css'
-export default function Header () {
-    const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
-    const [isLogInModalOpen, setIsLogInModalOpen] = useState(false);
-  
-    const handleOpenRegistrationModal = () => {
-      setIsRegistrationModalOpen(true);
-    };
-  
-    const handleCloseRegistrationModal = () => {
-      setIsRegistrationModalOpen(false);
-    };
-  
-    const handleOpenLogInModal = () => {
-      setIsLogInModalOpen(true);
-    };
-  
-    const handleCloseLogInModal = () => {
-      setIsLogInModalOpen(false);
-    };
-    const handleLogout = async () => {
-        try {
-          await logoutUser();
-          console.log("User logged out");
-        } catch (error) {
-          console.error("Logout failed:", error);
-        }
-      };
-    return (
-        <div className={css.wrapper}>
-            <div>
-            <a className={css.logo}>Nanny.Services</a>
-            </div>
-            <div className={css.navigationDiv}>
-            <div className={css.navigation}>
-                <NavLink to={'/'}>
-                    Home
-                </NavLink>
-                <NavLink to={'/nannies'}>
-                    Nannies
-                </NavLink>
-            </div>
-            <div className={css.btn}>
-            <button type='button' className={css.logIn} onClick={handleOpenLogInModal}>
-            Log In
-          </button>
-          <button type='button' className={css.registration} onClick={handleOpenRegistrationModal}>
-            Registration
-          </button>
-          <button type='button' className={css.logIn} onClick={handleOpenRegistrationModal}>
-            Log out
-          </button>
-            </div>
-            </div>
-            {isRegistrationModalOpen && (
-        <RegistrationModal onClose={handleCloseRegistrationModal} />
+import { NavLink } from "react-router-dom";
+import { auth } from "../../services/firebase"; 
+import { logoutUser } from '../../services/authService'; // Імпортуйте logoutUser з authService.js
+
+import { useEffect, useState } from "react";
+
+import UserMenu from "../../components/UserMenu/UserMenu.jsx";
+import { AuthNav } from "../../components/AuthNav/AuthNav.jsx";
+import LogInModal from "../../components/LogInModal/LogInModal";
+import RegistrationModal from "../../components/RegistrationModal/RegistrationModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import css from "./Header.module.css";
+export default function Header() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLogInModalOpen, setIsLogInModalOpen] = useState(false);
+  const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setIsAuthenticated(!!user);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      toast.success("Successfully logged out");
+    } catch (error) {
+      toast.error("Logout failed");
+    }
+  };
+
+  const handleLoginSuccess = () => {
+    setIsLogInModalOpen(false);
+    toast.success("Successfully logged in");
+  };
+
+  const handleRegistrationSuccess = () => {
+    setIsRegistrationModalOpen(false);
+    toast.success("Successfully registered");
+  };
+
+  const handleLoginError = (error) => {
+    toast.error(`Login failed: ${error.message}`);
+  };
+
+  const handleRegistrationError = (error) => {
+    toast.error(`Registration failed: ${error.message}`);
+  };
+
+  return (
+    <div className={css.wrapper}>
+      <div>
+        <a className={css.logo}>Nanny.Services</a>
+      </div>
+      <div className={css.navigationDiv}>
+        <div className={css.navigation}>
+          <NavLink to={"/"}>Home</NavLink>
+          <NavLink to={"/nannies"}>Nannies</NavLink>
+        </div>
+        <div className={css.btn}>
+          {isAuthenticated ? (
+            <UserMenu onLogout={handleLogout} />
+          ) : (
+            <AuthNav
+              onLogInClick={() => setIsLogInModalOpen(true)}
+              onRegistrationClick={() => setIsRegistrationModalOpen(true)}
+            />
+          )}
+        </div>
+      </div>
+      {isLogInModalOpen && (
+        <LogInModal
+          onClose={() => setIsLogInModalOpen(false)}
+          onSuccess={handleLoginSuccess}
+          onError={handleLoginError}
+        />
       )}
 
-      {isLogInModalOpen && (
-        <LogInModal onClose={handleCloseLogInModal} />
+      {isRegistrationModalOpen && (
+        <RegistrationModal
+          onClose={() => setIsRegistrationModalOpen(false)}
+          onSuccess={handleRegistrationSuccess}
+          onError={handleRegistrationError}
+        />
       )}
-        </div>
-    )
+
+      <ToastContainer />
+    </div>
+  );
 }

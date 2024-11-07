@@ -1,11 +1,11 @@
 
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { useState, useEffect } from 'react';
 import { registerUser } from '../../services/authService';
-
+import * as yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import sprite from "../../images/icons-sprite.svg";
 import css from "./RegistrationModal.module.css";
 
@@ -15,28 +15,51 @@ const schema = yup.object().shape({
     password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
   });
 
-export default function RegistrationModal () {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm({
-        resolver: yupResolver(schema),
-      });
-      const navigate = useNavigate(); 
+export default function RegistrationModal ({onClose}) {
+  const { register, handleSubmit, formState: { errors } } = useForm();   
+  const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
       const onSubmit = async (data) => {
         try {
           await registerUser(data.email, data.password);
+          console.log(data);
+          toast.success('Successfully registered!');
           onClose(); 
           navigate('/nannies');
         } catch (error) {
           console.error("Registration failed:", error);
         }
       };
+
+      // логыка закриття вікна 
+      useEffect(() => {
+        const handleEsc = (event) => {
+          if (event.key === 'Escape') {
+            onClose();
+          }
+        };
+    
+        window.addEventListener('keydown', handleEsc);
+    
+        return () => {
+          window.removeEventListener('keydown', handleEsc);
+        };
+      }, [onClose]);
+    
+      const handleBackdropClick = (event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      };
+      const togglePasswordVisibility = () => {
+        setShowPassword((prevState) => !prevState);
+      };
+    
     return (
-        <div className={css.wrapper}>
-        <div className={css.closeBtn}>
+       <div  className={css.backdrop}  onClick={handleBackdropClick}>
+              <div className={css.wrapper}>
+        <div className={css.closeBtn} onClick={onClose}>
         <svg className={css.iconClose}>
                 <use xlinkHref={`${sprite}#icon-close`}></use>
               </svg>
@@ -54,6 +77,7 @@ export default function RegistrationModal () {
             placeholder="Name"
             {...register('name')}
             className={css.inputs}
+            required
           />
           {errors.name && <p className={css.error}>{errors.name.message}</p>}
         </div>
@@ -63,6 +87,7 @@ export default function RegistrationModal () {
             placeholder="Email"
             {...register('email')}
             className={css.inputs}
+            required
           />
           {errors.email && <p className={css.error}>{errors.email.message}</p>}
         </div>
@@ -72,19 +97,23 @@ export default function RegistrationModal () {
             placeholder="Password"
             {...register('password')}
             className={`${css.inputs} ${css.eye}`}
+            required
           />
-               <svg className={css.iconEyeOff}>
-                <use xlinkHref={`${sprite}#icon-eye-off`}></use>
-              </svg>
+               <svg className={css.iconEyeOff} onClick={togglePasswordVisibility}>
+               <use xlinkHref={`${sprite}#${showPassword ? 'icon-eye' : 'icon-eye-off'}`}></use>
+               </svg>
           {errors.password && <p className={css.error}>{errors.password.message}</p>}
         </div>
       
       </form>
+      <ToastContainer />
+
             </div>
             <div className={css.btnDiv}>
           <button className={css.btn} type="submit">Sign Up</button>
         </div>
         </div>
         </div>
+       </div>
     )
 }

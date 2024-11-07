@@ -1,10 +1,17 @@
 import Header from "../../components/Header/Header";
 import ExperiencedNanniesModal from '../../components/ExperiencedNanniesModal/ExperiencedNanniesModal'
+import { useNavigate } from 'react-router-dom'; 
+
 import sprite from "../../images/icons-sprite.svg";
 
 
 import css from "./HomePage.module.css";
 export default function HomePage() {
+  const navigate = useNavigate(); // Використовуйте useNavigate
+
+  const handleGetStartedClick = () => {
+    navigate('/nannies'); // Перенаправити на NanniesPage
+  };
   return (
     <>
       <div className={css.wrapper}>
@@ -19,12 +26,12 @@ export default function HomePage() {
             <p className={css.paragraph}>
               Find Babysitters Online for All Occasions
             </p>
-            <button className={css.btnGetStarted} type="button">
-              Get started
-              <svg className={css.icon}>
-                <use xlinkHref={`${sprite}#icon-arrow-up-right`}></use>
-              </svg>
-            </button>
+            <button className={css.btnGetStarted} type="button" onClick={handleGetStartedClick}>
+            Get started
+            <svg className={css.icon}>
+              <use xlinkHref={`${sprite}#icon-arrow-up-right`}></use>
+            </svg>
+          </button>
           </div>
         </div>
         <div className={css.backgroundImage}></div>

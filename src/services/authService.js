@@ -24,12 +24,13 @@ export const loginUser = async (email, password) => {
   }
 };
 
-// Логаут користувача
+// Функція для виходу користувача
 export const logoutUser = async () => {
   try {
     await signOut(auth);
+    console.log("User logged out");
   } catch (error) {
-    console.error("Error logging out user:", error);
+    console.error("Error logging out:", error);
     throw error;
   }
 };

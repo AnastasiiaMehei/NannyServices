@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+.logIn {
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    border-radius: 30px;
+    /* padding: 14px 39px; */
+    width: 124px;
+    height: 48px;
+    background-color: transparent;
+}
+.registration {
+    border-radius: 30px;
+    padding: 14px 40px;
+    width: 168px;
+    height: 48px;
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    background-color: transparent;
+
+}
