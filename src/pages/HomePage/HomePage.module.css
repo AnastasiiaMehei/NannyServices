@@ -13,9 +13,9 @@ padding-right: 95px;
 padding-left: 95px; */
 }
 .header {
-    position: fixed;
-    top: 50px;
-    right: 12%;
+position: absolute;
+    top: 3%;
+    right: -10%;
   
 }
 .divider {

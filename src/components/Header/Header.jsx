@@ -7,7 +7,6 @@ import { AuthNav } from "../../components/AuthNav/AuthNav.jsx";
 import LogInModal from "../../components/LogInModal/LogInModal";
 import RegistrationModal from "../../components/RegistrationModal/RegistrationModal";
 import { ToastContainer, toast } from "react-toastify";
-import ThemeContext from '../../components/ThemeContext/ThemeContext.jsx'
 import "react-toastify/dist/ReactToastify.css";
 import css from "./Header.module.css";
 export default function Header() {
@@ -52,7 +51,6 @@ export default function Header() {
 
   return (
     <div className={css.wrapper}>
-      <ThemeContext/>
       <div>
         <a className={css.logo}>Nanny.Services</a>
       </div>

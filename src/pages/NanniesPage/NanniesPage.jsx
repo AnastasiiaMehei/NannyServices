@@ -1,7 +1,3 @@
-// import css from './NanniesPage.module.css'
-
-// import Header from "../../components/Header/Header";
-
 import FilterNannies from "../../components/FilterNannies/FilterNannies";
 import Header from "../../components/Header/Header";
 import NannyCard from "../../components/NannyCard/NannyCard";
@@ -47,10 +43,10 @@ export default function NanniesPage () {
        <div className={css.divInfo}>
        <FilterNannies/>
         <div className={css.loadMoreDiv}>
-        {nannies.map(nanny => (
+        {/* {nannies.map(nanny => (
           <NannyCard key={nanny.id} {...nanny} />
-        ))}
-
+        ))} */}
+<NannyCard/>
         <button className={css.loadMoreBtn} type="button">Load more </button>
         </div>
        </div>

@@ -1,6 +1,9 @@
 .wrapper {
     display: flex;
     flex-direction: column;
+    /* position: relative; */
+    margin-left: 100px;
+    margin-bottom: 24px;
 
 }
 .divInfo {
@@ -32,4 +35,7 @@ border: none;
     background: var(--primary-color-red);
     padding: 15px;
     margin-bottom: 60px;
+    /* position: absolute; */
+    /* left: 10%; */
+    padding-left: 110px;
 }
