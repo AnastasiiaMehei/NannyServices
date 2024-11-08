@@ -17,7 +17,7 @@
 .buttonDiv {
     border-radius: 14px;
 width: 226px;
-background-color: var(--primary-color-red);
+background-color: var(--primary-color);
 color: var(--primary-color-white);
 display: flex;
 flex-direction: row;

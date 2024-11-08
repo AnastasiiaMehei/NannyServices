@@ -6,7 +6,7 @@
     border-radius: 30px;
 width: 1376px;
 height: 736px;
-background: var(--primary-color-red);
+background: var(--primary-color);
 position: relative;
 /* padding-top: 30px;
 padding-right: 95px;
@@ -15,8 +15,8 @@ padding-left: 95px; */
 .header {
 position: absolute;
     top: 3%;
-    right: -10%;
-  
+    right: -6%;
+   
 }
 .divider {
     width: 1376px;

@@ -9,11 +9,19 @@
 
   color-scheme: light dark;
   color: #fbfbfb;
-    background: #fbfbfb; 
+  --background-color: #f3f3f3;
+  --primary-color: #f03f3b;
     font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+[data-theme='firstClick'] {
+  --primary-color: #0957c3; /* Колір після першого натиску */
+}
+
+[data-theme='secondClick'] {
+  --primary-color: #103931; /* Колір після другого натиску */
 }
 /* Reset styles */
 h1,

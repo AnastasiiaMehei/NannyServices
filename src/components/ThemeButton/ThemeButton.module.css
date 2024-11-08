@@ -1,0 +1,17 @@
+.wrapper {
+
+    background-color: transparent;
+    border: none;
+    
+ 
+}
+.btn {
+    background-color: transparent;
+    border: none;
+
+
+}
+.btn svg {
+    width: 35px;
+    height: 44px;
+}

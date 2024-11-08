@@ -13,7 +13,7 @@
     border-radius: 13px;
     width: 54px;
     height: 54px;
-    background: var(--primary-color-red);
+    background: var(--primary-color);
     display: flex;
     justify-content: center;
     align-items: center;

@@ -8,7 +8,12 @@
     border: none;
     background: transparent;
     position: relative;
-
+} 
+.themeButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }
 .logo {
     font-weight: 500;

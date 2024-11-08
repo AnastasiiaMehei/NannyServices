@@ -9,6 +9,7 @@ import RegistrationModal from "../../components/RegistrationModal/RegistrationMo
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import css from "./Header.module.css";
+import ThemeButton from "../ThemeButton/ThemeButton.jsx";
 export default function Header() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLogInModalOpen, setIsLogInModalOpen] = useState(false);
@@ -51,7 +52,8 @@ export default function Header() {
 
   return (
     <div className={css.wrapper}>
-      <div>
+      <div className={css.themeButton}>
+      <ThemeButton/>
         <a className={css.logo}>Nanny.Services</a>
       </div>
       <div className={css.navigationDiv}>
