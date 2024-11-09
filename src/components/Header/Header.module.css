@@ -26,16 +26,31 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 92px;
+    gap: 72px;
 }
 .navigation {
-    width: 141px;
-height: 20px;
-    display: flex;
+    gap: 45px;    display: flex;
 flex-direction: row;  
 justify-content: space-between;  
     line-height: 1.25;
     letter-spacing: -0.01em;
+}
+.ellipseDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.iconEllipse {
+    width: 8px;
+    height: 8px;
+}
+.active {
+    display: flex;
+
+}
+.block {
+    display: block;
+
 }
 .btn {
     width: 300px;

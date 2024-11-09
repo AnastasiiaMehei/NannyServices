@@ -3,7 +3,7 @@ import sprite from "../../images/icons-sprite.svg";
 
 import css from "./NannyCard.module.css";
 
-export default function NannyCard({ nanny = {} }) {
+export default function NannyCard({ nanny = {}, onToggleFavorite }) {
   const {
     name,
     avatar_url,
@@ -17,9 +17,17 @@ export default function NannyCard({ nanny = {} }) {
     about,
     characters,
     rating,
+    id
   } = nanny;
 
+  const [isFavorite, setIsFavorite] = useState(false);
+  const handleToggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+    onToggleFavorite(id); // Notify parent component about the change
+  };
+
   const [showReviews, setShowReviews] = useState(false);
+
 
   const handleReadMoreClick = () => {
     setShowReviews(true);
@@ -81,9 +89,11 @@ export default function NannyCard({ nanny = {} }) {
                 </p>
               </div>
             </div>
-            <div>
+            <div onClick={handleToggleFavorite}>
               <svg className={css.iconLike}>
-                <use xlinkHref={`${sprite}#icon-blackLike`}></use>
+                {/* <use xlinkHref={`${sprite}#icon-blackLike`}></use> */}
+                <use xlinkHref={`${sprite}#icon-${isFavorite ? 'redLike' : 'blackLike'}`}></use>
+
               </svg>
             </div>
           </div>
@@ -136,7 +146,6 @@ export default function NannyCard({ nanny = {} }) {
                   <div className={css.reviewDiv}>
                     <div className={css.reviewAvatar}>
                       <p className={css.reviewAvatarName}>
-                        {" "}
                         {reviewer ? reviewer.charAt(0) : ""}
                         {reviewer ? reviewer.slice(0, 0) : ""}
                       </p>
@@ -147,7 +156,7 @@ export default function NannyCard({ nanny = {} }) {
                         <svg className={css.rating}>
                           <use xlinkHref={`${sprite}#icon-star`}></use>
                         </svg>
-                        <p>{rating}.0</p>
+                        <p>{rating}</p>
                       </div>
                     </div>
                   </div>

@@ -15,7 +15,7 @@ const schema = yup.object().shape({
     password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
   });
 
-export default function RegistrationModal ({onClose}) {
+export default function RegistrationModal ({onClose, onRegister}) {
   const { register, handleSubmit, formState: { errors } } = useForm();   
   const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import sprite from "../../images/icons-sprite.svg";
 
 import css from "./FilterNannies.module.css";
-export default function FilterNannies() {
-    const [isContainerVisible, setIsContainerVisible] = useState(false);
+export default function FilterNannies({ sortCriteria, onSortChange }) {
+    const [isContainerVisible, setIsContainerVisible] = useState(true);
 
     const toggleContainerVisibility = () => {
       setIsContainerVisible((prevState) => !prevState);
@@ -12,21 +12,18 @@ export default function FilterNannies() {
     <div className={css.wrapper}>
       <p className={css.paragraph}  >Filters</p>
       <div className={css.paragraph}>
-        <div className={css.buttonDiv} type="button" >
-          A to Z
-          <svg className={css.icon} onClick={toggleContainerVisibility}>
-            <use xlinkHref={`${sprite}#icon-down`}></use>
-          </svg>
-        </div>
+
         {isContainerVisible && (
-        <div className={css.container}>
-          <p className={css.containerParagraph}>A to Z</p>
-          <p className={css.containerParagraph}>Z to A</p>
-          <p className={css.containerParagraph}>Less than 10$</p>
-          <p className={css.containerParagraph}>Greater than 10$</p>
-          <p className={css.containerParagraph}>Popular</p>
-          <p className={css.containerParagraph}>Not popular</p>
-          <p className={css.containerParagraph}>Show all</p>
+        <div >
+          <select className={css.buttonDiv} id="sort" value={sortCriteria} onChange={(e) => onSortChange(e.target.value)}>
+        <option className={css.container} value="alphabetical-asc">Alphabetical (A-Z)</option>
+        <option className={css.container} value="alphabetical-desc">Alphabetical (Z-A)</option>
+        <option className={css.container} value="price-asc">Price (Low to High)</option>
+        <option className={css.container} value="price-desc">Price (High to Low)</option>
+        <option className={css.container} value="rating-asc">Rating (Low to High)</option>
+        <option className={css.container} value="rating-desc">Rating (High to Low)</option>
+      </select>
+
         </div>
           )}
       </div>

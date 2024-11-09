@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { auth } from "../../services/firebase"; 
 import { logoutUser } from '../../services/authService'; // Імпортуйте logoutUser з authService.js
 import { useEffect, useState } from "react";
@@ -8,12 +8,16 @@ import LogInModal from "../../components/LogInModal/LogInModal";
 import RegistrationModal from "../../components/RegistrationModal/RegistrationModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import sprite from "../../images/icons-sprite.svg";
+
 import css from "./Header.module.css";
 import ThemeButton from "../ThemeButton/ThemeButton.jsx";
 export default function Header() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLogInModalOpen, setIsLogInModalOpen] = useState(false);
   const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
+const location = useLocation();
+const isActive = location.pathname === '/nannies';
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -58,8 +62,40 @@ export default function Header() {
       </div>
       <div className={css.navigationDiv}>
         <div className={css.navigation}>
+          <div className={css.ellipseDiv}>
           <NavLink to={"/"}>Home</NavLink>
+
+          </div>
+          <div className={css.ellipseDiv}>
           <NavLink to={"/nannies"}>Nannies</NavLink>
+   
+          {/* {location.pathname === '/nannies' && (
+        <svg className={`${css.iconEllipse} ${css.block}`}>
+          <use xlinkHref={`${sprite}#icon-ellipse`}></use>
+        </svg>
+      )} */}
+      <svg className={`${css.iconEllipse} ${isActive ? css.active : css.block}`}>
+  <use xlinkHref={`${sprite}#icon-ellipse`}></use>
+</svg>
+          </div>
+<div className={css.ellipseDiv}>
+    
+                     {location.pathname !== '/' && (
+        <div className={css.ellipseDiv}>
+          <NavLink to="/favorites">Favorites</NavLink>
+          <svg className={`${css.iconEllipse} ${css.favorites}`}>
+          <use xlinkHref={`${sprite}#icon-ellipse`}></use>
+          </svg>
+        </div>
+      )}
+        {location.pathname === '/favorites' && (
+        <svg className={`${css.iconEllipse} ${css.favorites}`}>
+          <use xlinkHref={`${sprite}#icon-ellipse`}></use>
+        </svg>
+      )}
+      
+
+</div>
         </div>
         <div className={css.btn}>
           {isAuthenticated ? (

@@ -40,7 +40,7 @@ background-size: contain;
     justify-content: space-between;
 }
 .nameDiv {
-    width: 201px;
+    /* width: 201px; */
 height: 56px;
 display: flex;
 flex-direction: column;
@@ -60,11 +60,13 @@ color: var(--primary-color-black);
 .container {
 display: flex;
 flex-direction: row;
+align-items: center;
+gap: 50px;
 }
 .info {
     display: flex;
     flex-direction: row;
-    width: 423px;
+    /* width: 423px; */
 height: 24px;
 /* gap: 10px; */
 }
@@ -172,16 +174,18 @@ padding: 0;
 }
 /* reviews */
 .reviews {
-    width: 482px;
+    /* width: 482px; */
     display: flex;
     flex-direction: column;
     gap: 25px;
+    align-items: flex-start;
+    margin-top: 50px;
 
 }
 .reviewDiv {
     display: flex;
     flex-direction: row;
-    width: 111px;
+    /* width: 111px; */
     align-items: center;
     gap: 16px;
     margin-bottom: 16px;
@@ -210,6 +214,8 @@ line-height: 1.25;
 color: rgba(17, 16, 28, 0.5);
 }
 .nameReviewer{
+    display: flex;
+    flex-direction: column;
     font-family: "Helvetica Neue", sans-serif;
 font-weight: 500;
 font-size: 14px;

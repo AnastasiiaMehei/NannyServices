@@ -1,7 +1,7 @@
 .container {
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 8px;
 }
 .logIn {
     border: 1px solid rgba(251, 251, 251, 0.4);
