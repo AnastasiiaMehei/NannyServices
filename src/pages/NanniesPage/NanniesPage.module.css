@@ -1,8 +1,9 @@
 .wrapper {
     display: flex;
     flex-direction: column;
+    align-items: center;
     /* position: relative; */
-    margin-left: 100px;
+    /* margin-left: 100px; */
     margin-bottom: 24px;
 
 }
@@ -10,6 +11,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    /* margin-bottom: 45px; */
+    gap: 45px;
 }
 .loadMoreDiv {
     display: flex;
@@ -36,5 +39,5 @@ border: none;
     margin-bottom: 60px;
     /* position: absolute; */
     /* left: 10%; */
-    padding-left: 110px;
+    padding-left: 340px;
 }

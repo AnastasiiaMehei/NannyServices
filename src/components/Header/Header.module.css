@@ -3,7 +3,8 @@
     align-items: center;
     justify-content: space-between;
     /* width: 1184px; */
-    width: 1240px;
+    width: 1440px;   
+    margin: 0 auto;
     height: 48px;
     border: none;
     background: transparent;

@@ -3,38 +3,49 @@ import Header from "../../components/Header/Header";
 import NannyCard from "../../components/NannyCard/NannyCard";
 import  { useState, useEffect } from 'react';
 import {db} from '../../services/firebase'
-import { ref, get, child } from "firebase/database"; 
+import { ref, get, child, onValue } from "firebase/database"; 
 
 
 import css from "./NanniesPage.module.css";
 
 export default function NanniesPage () {
     const [nannies, setNannies] = useState([]);
+    const [visibleNannyCard, setVisibleNannyCard] = useState(3);
+
+    const handleLoadMore = () => {
+      setVisibleNannyCard(prev => prev + 3);
+    };
+  
 
   useEffect(() => {
-    const fetchNannies = async () => {
+
+
+   
       const dbRef = ref(db);
-      try {
-        const snapshot = await get(child(dbRef, 'nannies'));
-        if (snapshot.exists()) {
+
+      const unsubscribe = onValue(
+        dbRef,
+        (snapshot) => {
           const data = snapshot.val();
-          console.log("Data fetched:", data); // Додайте це для перевірки
-
-          const nanniesArray = Object.keys(data).map(key => ({
-            id: key,
-            ...data[key]
-          }));
-          setNannies(nanniesArray);
-        } else {
-          console.log("No data available");
+          console.log("Fetched data:", data); 
+          if (data) {
+            const nanniesList = Object.values(data);
+            setNannies(nanniesList);
+          } else {
+            setNannies([]);
+          }
+        },
+        (error) => {
+          console.error("Error fetching nannies:", error);
+          setError(error);
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchNannies();
+      );
+    
+    return () => unsubscribe();
   }, []);
+
+
+
     return (
         <div className={css.wrapper}>
          <div className={css.header}>
@@ -43,11 +54,11 @@ export default function NanniesPage () {
        <div className={css.divInfo}>
        <FilterNannies/>
         <div className={css.loadMoreDiv}>
-        {/* {nannies.map(nanny => (
-          <NannyCard key={nanny.id} {...nanny} />
-        ))} */}
-<NannyCard/>
-        <button className={css.loadMoreBtn} type="button">Load more </button>
+        {nannies.slice(0, visibleNannyCard).map((nanny, index) => (
+          <NannyCard key={nanny.id || index} nanny={nanny}/>
+        ))}
+{visibleNannyCard < nannies.length && (        <button className={css.loadMoreBtn} type="button" onClick={handleLoadMore}>Load more </button>
+)}
         </div>
        </div>
         </div>
