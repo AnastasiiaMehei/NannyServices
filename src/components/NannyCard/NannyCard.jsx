@@ -167,12 +167,14 @@ const handleCloseModal = () => {
             <p>Characters:</p>
             {/* <p className={css.details}>{characters} </p> */}
             <div className={css.details}>
-              {characters.map((character, index) => {
-                return (
-                  <span key={index}>{`${character.toUpperCase(0, 0)}, `}</span>
-                );
-              })}
-            </div>
+  {characters.map((character, index) => {
+    const capitalizedCharacter = character.charAt(0).toUpperCase() + character.slice(1);
+    return (
+      <span key={index}>{`${capitalizedCharacter}, `}</span>
+    );
+  })}
+</div>
+
           </div>
           <div className={css.personalInfoParagraph}>
             <p>Education:</p>

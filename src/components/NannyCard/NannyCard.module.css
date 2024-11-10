@@ -141,6 +141,7 @@ color: var(--primary-color-black);
     border-radius: 24px;
 padding: 8px 16px;
 color: #8a8a89;
+gap: 5px;
 
 }
 .age {
