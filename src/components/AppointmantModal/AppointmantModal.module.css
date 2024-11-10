@@ -60,6 +60,8 @@ color: rgba(17, 16, 28, 0.5);
 .yourNanny {
     display: flex;
     flex-direction: column;
+    text-align: justify;
+
 }
 .yourNannyTitle {
     font-family: "Helvetica Neue", sans-serif;
@@ -74,13 +76,12 @@ font-weight: 500;
 font-size: 16px;
 line-height: 1.5;
 color: #11101c;
-text-align: justify;
 }
 .avatar {
     border-radius: 15px;
     width: 44px;
     height: 44px;
-border: 1px solid red;}
+border: none}
 .form {
     display: flex;
     flex-direction: column;
@@ -111,7 +112,7 @@ color: #11101c;
     fill: #fafafa;
     position: absolute;
     top: 48%;
-    right: 9%;
+    right: 12%;
 }
 .clock {
     position: relative;

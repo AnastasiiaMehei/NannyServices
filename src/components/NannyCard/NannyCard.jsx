@@ -6,6 +6,7 @@ import { useAuth } from "../../services/AuthContext";
 import { toast } from 'react-toastify';
 
 import css from "./NannyCard.module.css";
+import { AppointmantModal } from "../AppointmantModal/AppointmantModal";
 
 export default function NannyCard({ nanny = {}, onToggleFavorite }) {
   const {
@@ -96,12 +97,10 @@ export default function NannyCard({ nanny = {}, onToggleFavorite }) {
   const age = calculateAge(birthday);
 // appointmant modal
 const handleAppointmentClick = () => {
-  if (!user) {
-    toast.error("Please log in to make an appointment");
-    return;
-  }
+  console.log('Opening modal with nanny data:', nanny); // Додайте для відлагодження
   setShowAppointmentModal(true);
 };
+
 
 const handleCloseModal = () => {
   setShowAppointmentModal(false);
@@ -223,9 +222,9 @@ const handleCloseModal = () => {
                 Make an appointment
               </button>
             </div>
-            {showAppointmentModal && (
+            {showAppointmentModal && nanny && (
         <AppointmantModal 
-          onClose={handleCloseModal}
+          onClose={() => setShowAppointmentModal(false)}
           nanny={nanny}
         />
       )}
