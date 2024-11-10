@@ -68,12 +68,6 @@ const isActive = location.pathname === '/nannies';
           </div>
           <div className={css.ellipseDiv}>
           <NavLink to={"/nannies"}>Nannies</NavLink>
-   
-          {/* {location.pathname === '/nannies' && (
-        <svg className={`${css.iconEllipse} ${css.block}`}>
-          <use xlinkHref={`${sprite}#icon-ellipse`}></use>
-        </svg>
-      )} */}
       <svg className={`${css.iconEllipse} ${isActive ? css.active : css.block}`}>
   <use xlinkHref={`${sprite}#icon-ellipse`}></use>
 </svg>
@@ -83,9 +77,9 @@ const isActive = location.pathname === '/nannies';
                      {location.pathname !== '/' && (
         <div className={css.ellipseDiv}>
           <NavLink to="/favorites">Favorites</NavLink>
-          <svg className={`${css.iconEllipse} ${css.favorites}`}>
-          <use xlinkHref={`${sprite}#icon-ellipse`}></use>
-          </svg>
+          {/* <svg className={`${css.iconEllipse} ${isActive ? css.active : css.block}`}>
+  <use xlinkHref={`${sprite}#icon-ellipse`}></use>
+</svg> */}
         </div>
       )}
         {location.pathname === '/favorites' && (

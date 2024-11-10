@@ -43,13 +43,14 @@ justify-content: space-between;
 .iconEllipse {
     width: 8px;
     height: 8px;
+    background-color: palevioletred;
 }
 .active {
     display: flex;
 
 }
 .block {
-    display: block;
+    display: none;
 
 }
 .btn {

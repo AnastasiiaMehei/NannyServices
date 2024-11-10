@@ -121,26 +121,24 @@ export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
               />
           
             </div>
-          </div>
-        </form>
-        <div>
-          <input
+            <input
             className={css.parents}
             type="text"
               name="parentName"
               placeholder="Father's or mother's name"
               required
           />
-        </div>
-        <div>
-          <input
+             <input
             className={css.comment}
             name="comment"
             id=""
             placeholder="Comment"
 
             />
-        </div>
+          </div>
+        </form>
+        <button className={css.btn} type="submit">Send</button>
+
       </div>
     </div>
   );
