@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import sprite from "../../images/icons-sprite.svg";
 import { getFavorites, addToFavorites, removeFromFavorites } from "../../services/favoritesService";
 import { useAuth } from "../../services/AuthContext";
-
 import { toast } from 'react-toastify';
 
 import css from "./NannyCard.module.css";
@@ -97,10 +96,12 @@ export default function NannyCard({ nanny = {}, onToggleFavorite }) {
   const age = calculateAge(birthday);
 // appointmant modal
 const handleAppointmentClick = () => {
-  console.log('Opening modal with nanny data:', nanny); // Додайте для відлагодження
+  if (!user) {
+    toast.error("Please log in to make an appointment");
+    return;
+  }
   setShowAppointmentModal(true);
 };
-
 
 const handleCloseModal = () => {
   setShowAppointmentModal(false);
@@ -222,11 +223,14 @@ const handleCloseModal = () => {
                 Make an appointment
               </button>
             </div>
-            {showAppointmentModal && nanny && (
-        <AppointmantModal 
-          onClose={() => setShowAppointmentModal(false)}
-          nanny={nanny}
-        />
+            {showAppointmentModal && (
+        <>
+          <AppointmantModal 
+            onClose={handleCloseModal}
+            nannyName={name}
+            nannyAvatar={avatar_url}
+          />
+        </>
       )}
           </div>
         )}

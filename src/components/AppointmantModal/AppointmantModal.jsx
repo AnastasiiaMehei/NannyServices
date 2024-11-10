@@ -6,7 +6,8 @@ import sprite from "../../images/icons-sprite.svg";
 
 import css from "./AppointmantModal.module.css";
 
-export function AppointmantModal({ onClose, nannyName, nannyAvatar }) {
+export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
+    console.log('Received in AppointmantModal:', nannyName, nannyAvatar);
     const { user } = useAuth();
     const [formData, setFormData] = useState({
       address: '',
@@ -50,8 +51,7 @@ export function AppointmantModal({ onClose, nannyName, nannyAvatar }) {
       try {
         console.log('Appointment data:', {
           ...formData,
-          nannyName,
-          nannyAvatar
+          nanny,
         });
         onClose();
         toast.success('Appointment scheduled successfully!');
@@ -78,12 +78,12 @@ export function AppointmantModal({ onClose, nannyName, nannyAvatar }) {
         <div className={css.personalInformation}>
           <div>
           {nannyAvatar && (
-                <img 
-                  src={nannyAvatar} 
-                  alt={nannyName} 
-                  className={css.avatar}
-                />
-              )}
+              <img 
+                src={nannyAvatar} 
+                alt={nannyName} 
+                className={css.avatar}
+              />
+            )}
           </div>
           <div className={css.yourNanny}>
             <p className={css.yourNannyTitle}>Your nanny</p>

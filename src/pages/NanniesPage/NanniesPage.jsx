@@ -121,7 +121,6 @@ export default function NanniesPage() {
               Load more
             </button>
           )}
-          <AppointmantModal/>
         </div>
       </div>
     </div>
