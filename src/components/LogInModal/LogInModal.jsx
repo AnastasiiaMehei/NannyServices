@@ -20,29 +20,24 @@ const schema = yup.object().shape({
     .required("Password is required"),
 });
 export default function LogInModal({ onClose }) {
-  const [showPassword, setShowPassword] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
   const onSubmit = async (data) => {
     try {
+      console.log('Login data:', data); // Додайте для відлагодження
       await loginUser(data.email, data.password);
-      console.log(data);
-
       toast.success('Successfully logged in!');
       onClose();
-      navigate("/nannies");
+      navigate('/nannies');
     } catch (error) {
-      console.error("Login failed:", error);
-      toast.error('Try again!');
+      console.error("Login error:", error);
+      toast.error(error.message);
     }
   };
+
 
   useEffect(() => {
     const handleEsc = (event) => {
@@ -68,7 +63,7 @@ export default function LogInModal({ onClose }) {
 
 
   return (
-    <div className={css.backdrop} onClick={handleBackdropClick}>
+    <div className={css.backdrop} onClick={(e) => e.target === e.currentTarget && onClose()}>
 <div className={css.wrapper}>
       <div className={css.closeBtn}>
         <svg className={css.iconClose} onClick={onClose}>
@@ -113,14 +108,15 @@ export default function LogInModal({ onClose }) {
                 <p className={css.error}>{errors.password.message}</p>
               )}
             </div>
+            <button className={css.btn} type="submit">
+            Log in
+          </button>
           </form>
           <ToastContainer />
 
         </div>
         <div className={css.btnDiv}>
-          <button className={css.btn} type="submit">
-            Log in
-          </button>
+        
         </div>
       </div>
 

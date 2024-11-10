@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import sprite from "../../images/icons-sprite.svg";
+import { getFavorites, addToFavorites, removeFromFavorites } from "../../services/favoritesService";
+import { useAuth } from "../../services/AuthContext";
+
+import { toast } from 'react-toastify';
 
 import css from "./NannyCard.module.css";
 
@@ -20,11 +24,48 @@ export default function NannyCard({ nanny = {}, onToggleFavorite }) {
     id
   } = nanny;
 
+  const { user } = useAuth();
+  const [showAppointmentModal, setShowAppointmentModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const handleToggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-    onToggleFavorite(id); // Notify parent component about the change
+  useEffect(() => {
+    const checkFavoriteStatus = async () => {
+      if (user && nanny.id) {
+        try {
+          console.log('Checking favorites for user:', user.uid);
+          const favorites = await getFavorites(user.uid);
+          console.log('Favorites:', favorites);
+          setIsFavorite(!!favorites[nanny.id]);
+        } catch (error) {
+          console.error("Error checking favorite status:", error);
+        }
+      }
+    };
+
+    checkFavoriteStatus();
+  }, [user, nanny.id]);
+
+  const handleToggleFavorite = async () => {
+    if (!user) {
+      toast.error("Please log in to add favorites");
+      return;
+    }
+
+    try {
+      if (isFavorite) {
+        await removeFromFavorites(user.uid, nanny.id);
+        setIsFavorite(false);
+        toast.success("Removed from favorites");
+      } else {
+        await addToFavorites(user.uid, nanny.id);
+        setIsFavorite(true);
+        toast.success("Added to favorites");
+      }
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+      toast.error("Error updating favorites");
+    }
   };
+
 
   const [showReviews, setShowReviews] = useState(false);
 
@@ -53,6 +94,18 @@ export default function NannyCard({ nanny = {}, onToggleFavorite }) {
   }
 
   const age = calculateAge(birthday);
+// appointmant modal
+const handleAppointmentClick = () => {
+  if (!user) {
+    toast.error("Please log in to make an appointment");
+    return;
+  }
+  setShowAppointmentModal(true);
+};
+
+const handleCloseModal = () => {
+  setShowAppointmentModal(false);
+};
 
   return (
     <div className={css.wrapper}>
@@ -91,7 +144,6 @@ export default function NannyCard({ nanny = {}, onToggleFavorite }) {
             </div>
             <div onClick={handleToggleFavorite}>
               <svg className={css.iconLike}>
-                {/* <use xlinkHref={`${sprite}#icon-blackLike`}></use> */}
                 <use xlinkHref={`${sprite}#icon-${isFavorite ? 'redLike' : 'blackLike'}`}></use>
 
               </svg>
@@ -167,10 +219,16 @@ export default function NannyCard({ nanny = {}, onToggleFavorite }) {
               );
             })}
             <div>
-              <button className={css.appointmentBtn} type="submit">
+              <button className={css.appointmentBtn} type="submit" onClick={handleAppointmentClick}>
                 Make an appointment
               </button>
             </div>
+            {showAppointmentModal && (
+        <AppointmantModal 
+          onClose={handleCloseModal}
+          nanny={nanny}
+        />
+      )}
           </div>
         )}
       </div>

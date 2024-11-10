@@ -16,22 +16,22 @@ const schema = yup.object().shape({
   });
 
 export default function RegistrationModal ({onClose, onRegister}) {
-  const { register, handleSubmit, formState: { errors } } = useForm();   
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-      const onSubmit = async (data) => {
-        try {
-          await registerUser(data.email, data.password);
-          console.log(data);
-          toast.success('Successfully registered!');
-          onClose(); 
-          navigate('/nannies');
-        } catch (error) {
-          console.error("Registration failed:", error);
-        }
-      };
-
+  const onSubmit = async (data) => {
+    try {
+      console.log('Registration data:', data); // Додайте для відлагодження
+      await registerUser(data.email, data.password);
+      toast.success('Successfully registered!');
+      onClose();
+      navigate('/nannies');
+    } catch (error) {
+      console.error("Registration error:", error);
+      toast.error(error.message);
+    }
+  };
       // логыка закриття вікна 
       useEffect(() => {
         const handleEsc = (event) => {
@@ -57,7 +57,7 @@ export default function RegistrationModal ({onClose, onRegister}) {
       };
     
     return (
-       <div  className={css.backdrop}  onClick={handleBackdropClick}>
+       <div  className={css.backdrop}  onClick={(e) => e.target === e.currentTarget && onClose()}>
               <div className={css.wrapper}>
         <div className={css.closeBtn} onClick={onClose}>
         <svg className={css.iconClose}>
@@ -104,14 +104,14 @@ export default function RegistrationModal ({onClose, onRegister}) {
                </svg>
           {errors.password && <p className={css.error}>{errors.password.message}</p>}
         </div>
-      
+        <div className={css.btnDiv}>
+          <button className={css.btn} type="submit">Sign Up</button>
+        </div>
       </form>
       <ToastContainer />
 
             </div>
-            <div className={css.btnDiv}>
-          <button className={css.btn} type="submit">Sign Up</button>
-        </div>
+           
         </div>
         </div>
        </div>

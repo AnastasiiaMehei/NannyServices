@@ -7,6 +7,7 @@ import { ref, onValue } from "firebase/database";
 import Loader from "../../components/Loader/Loader";
 
 import css from "./NanniesPage.module.css";
+import { AppointmantModal } from "../../components/AppointmantModal/AppointmantModal";
 
 export default function NanniesPage() {
   const [nannies, setNannies] = useState([]);
@@ -14,8 +15,14 @@ export default function NanniesPage() {
   const [sortCriteria, setSortCriteria] = useState("alphabetical-asc");
 
   const [visibleNannyCard, setVisibleNannyCard] = useState(3);
+  const [loading, setLoading] = useState(true); // Додаємо стан для лоадера
+  const [error, setError] = useState(null); // Додаємо стан для помилок
+
+
 
   const handleLoadMore = () => {
+    setLoading(true); // Встановлюємо loading в true перед запитом
+
     setVisibleNannyCard((prev) => prev + 3);
   };
 
@@ -30,13 +37,18 @@ export default function NanniesPage() {
         if (data) {
           const nanniesList = Object.values(data);
           setNannies(nanniesList);
+          setLoading(false); // Встановлюємо loading в false після отримання даних
+
         } else {
           setNannies([]);
+
         }
       },
       (error) => {
         console.error("Error fetching nannies:", error);
         setError(error);
+        setLoading(false); // Встановлюємо loading в false у випадку помилки
+
       }
     );
 
@@ -84,6 +96,11 @@ export default function NanniesPage() {
   const handleSortChange = (newSortCriteria) => {
     setSortCriteria(newSortCriteria);
   };
+
+  if (error) {
+    return <div>Error loading data: {error.message}</div>;
+  }
+
   return (
     <div className={css.wrapper}>
       <div className={css.header}>
@@ -101,9 +118,10 @@ export default function NanniesPage() {
               type="button"
               onClick={handleLoadMore}
             >
-              Load more{" "}
+              Load more
             </button>
           )}
+          <AppointmantModal/>
         </div>
       </div>
     </div>
