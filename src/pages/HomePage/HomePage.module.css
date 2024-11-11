@@ -109,8 +109,7 @@ width: 618px;
            .header {
             margin-bottom: 15px;
             top: 1%;
-            right: 40%;
-               }
+            right: -2%;               }
            .title {
             font-size: 27px;
            }
@@ -121,6 +120,9 @@ width: 618px;
            }
            .title {
             width: 265px;
+            font-size: 15px;
            }
+        .paragraph {
+font-size: 15px;        }
        }
        

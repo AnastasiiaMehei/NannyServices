@@ -28,9 +28,11 @@ flex-direction: column;
     gap: 20px;
 }
 @media screen and (max-width: 767px) {
-
-    /* .header {
- width: 358px;
-    } */
+.header {
+    width: 331px;    padding: 24px
+}
+.filterDiv {
+    margin-top: 114px;
+}
   }
 
