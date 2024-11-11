@@ -16,6 +16,8 @@ export default function NanniesPage() {
 
   const [visibleNannyCard, setVisibleNannyCard] = useState(3);
   const [loading, setLoading] = useState(true); // Додаємо стан для лоадера
+
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null); // Додаємо стан для помилок
 
 
@@ -54,17 +56,32 @@ export default function NanniesPage() {
 
     return () => unsubscribe();
   }, []);
-  // useEffect(() => {
-  //   // Fetch data and set nannies
-  //   const fetchNannies = async () => {
-  //     // Replace with your actual data fetching logic
-  //     const data = await fetchNanniesFromAPI();
-  //     setNannies(data);
-  //     setSortedNannies(data);
-  //   };
+// loader
+useEffect(() => {
+  const fetchNannies = async () => {
+    setIsLoading(true);
+    try {
+      const dbRef = ref(db);
+      const unsubscribe = onValue(dbRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const nanniesList = Object.values(data);
+          setNannies(nanniesList);
+          setSortedNannies(nanniesList);
+        } else {
+          setNannies([]);
+        }
+        setIsLoading(false);
+      });
+      return unsubscribe;
+    } catch (error) {
+      console.error("Error fetching nannies:", error);
+      setIsLoading(false);
+    }
+  };
 
-  //   fetchNannies();
-  // }, []);
+  fetchNannies();
+}, []);
 
   useEffect(() => {
     let sorted = [...nannies];
@@ -108,7 +125,9 @@ export default function NanniesPage() {
       </div>
       <div className={css.divInfo}>
       <FilterNannies sortCriteria={sortCriteria} onSortChange={handleSortChange} />
-        <div className={css.loadMoreDiv}>
+      {
+        isLoading ? (<Loader/>) :(
+          <div className={css.loadMoreDiv}>
           {sortedNannies.slice(0, visibleNannyCard).map((nanny, index) => (
             <NannyCard key={nanny.id || index} nanny={nanny} />
           ))}
@@ -122,6 +141,8 @@ export default function NanniesPage() {
             </button>
           )}
         </div>
+        )
+      }
       </div>
     </div>
   );

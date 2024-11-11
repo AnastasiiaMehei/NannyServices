@@ -27,7 +27,6 @@ export default function LogInModal({ onClose }) {
 
   const onSubmit = async (data) => {
     try {
-      console.log('Login data:', data); // Додайте для відлагодження
       await loginUser(data.email, data.password);
       toast.success('Successfully logged in!');
       onClose();

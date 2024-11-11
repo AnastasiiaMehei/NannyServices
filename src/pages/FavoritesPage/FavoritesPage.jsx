@@ -14,7 +14,6 @@ export default function FavoritesPage() {
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    console.log('Favorites from localStorage:', favorites);
 
     const dbRef = ref(db, 'nannies');
     const unsubscribe = onValue(dbRef, (snapshot) => {

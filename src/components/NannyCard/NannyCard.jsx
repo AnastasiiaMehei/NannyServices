@@ -145,7 +145,6 @@ const handleCloseModal = () => {
             <div onClick={handleToggleFavorite}>
               <svg className={css.iconLike}>
                 <use xlinkHref={`${sprite}#icon-${isFavorite ? 'redLike' : 'blackLike'}`}></use>
-
               </svg>
             </div>
           </div>
