@@ -49,7 +49,7 @@ export default function FavoritesPage() {
             />
           ))
         ) : (
-          <p>No favorite nannies yet.</p>
+          <p className={css.allort}>No favorite nannies yet.</p>
         )}
       </div>
     </div>

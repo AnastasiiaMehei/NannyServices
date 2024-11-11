@@ -73,15 +73,16 @@ const isActive = location.pathname === '/nannies';
           </div>
           <div className={css.ellipseDiv}>
           <NavLink to={"/nannies"}>Nannies</NavLink>
-      <svg className={`${css.iconEllipse} ${isActive ? css.active : css.block}`}>
+      {/* <svg className={`${css.iconEllipse} ${isActive ? css.active : css.block}`}>
   <use xlinkHref={`${sprite}#icon-ellipse`}></use>
-</svg>
+</svg> */}
           </div>
 <div className={css.ellipseDiv}>
     
                      {location.pathname !== '/' && (
         <div className={css.ellipseDiv}>
-          <NavLink to="/favorites">Favorites</NavLink>
+          {user && (          <NavLink to="/favorites">Favorites</NavLink>
+)}
 
         </div>
       )}

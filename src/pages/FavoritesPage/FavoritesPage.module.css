@@ -27,6 +27,10 @@ flex-direction: column;
     align-items: center;
     gap: 20px;
 }
+.allort {
+    color: var(--primary-color);
+    font-size: 54px;
+}
 @media screen and (max-width: 1439px) {
     .header {
         width: 770px;        padding: 44px
