@@ -12,6 +12,7 @@ import sprite from "../../images/icons-sprite.svg";
 
 import css from "./Header.module.css";
 import ThemeButton from "../ThemeButton/ThemeButton.jsx";
+import { AvatarHeader } from "../AvatarHeader/AvatarHeader.jsx";
 export default function Header() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLogInModalOpen, setIsLogInModalOpen] = useState(false);
@@ -93,7 +94,10 @@ const isActive = location.pathname === '/nannies';
         </div>
         <div className={css.btn}>
           {isAuthenticated ? (
+            <>
+            <AvatarHeader/>
             <UserMenu onLogout={handleLogout} />
+            </>
           ) : (
             <AuthNav
               onLogInClick={() => setIsLogInModalOpen(true)}
