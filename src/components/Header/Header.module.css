@@ -54,7 +54,7 @@ justify-content: space-between;
 
 }
 .btn {
-    width: 300px;
+    /* width: 300px; */
     height: 48px;
     display: flex;
     flex-direction: row;
@@ -67,7 +67,7 @@ background-color: transparent;
 .logIn {
     border: 1px solid rgba(251, 251, 251, 0.4);
     border-radius: 30px;
-    /* padding: 14px 39px; */
+    padding: 14px 39px;
     width: 124px;
     height: 48px;
     background-color: transparent;
@@ -90,4 +90,63 @@ color: var(--primary-color-white);
     background: var(--primary-color-red);
     border: none;
     color: var(--primary-color-white);
+}
+
+
+@media screen and (max-width: 1439px) {
+ .wrapper {
+    justify-content: space-around;
+    width: 692px; }
+
+ .logo {
+    font-size: 14px;
+ }
+ .navigationDiv {
+    gap: 30px;
+
+ }
+ .navigation {
+    gap: 3px;
+        display: flex;
+    flex-direction: column;
+ }
+ .themeButton{
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-right: 16px;
+ }
+ .ellipseDiv {
+    flex-direction: row;
+    gap: 15px;
+ }
+}
+@media screen and (max-width: 767px) {
+    .wrapper {
+        justify-content: space-around;
+        width: 350px;
+        } 
+     .logo {
+        font-size: 10px;
+     }
+     .navigationDiv {
+        gap: 9x;
+     }
+     .navigation {
+        gap: 6px;
+        display: flex;
+        flex-direction: column;
+     }
+     .btn {
+        justify-content: center;
+
+     }
+     
+     .registration {
+          padding: 0px;
+          width: 0px;
+    height: 0;
+     }
+     .navigationDiv {
+gap: 20px;     }
 }

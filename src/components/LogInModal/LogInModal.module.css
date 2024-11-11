@@ -123,3 +123,17 @@ transition: var(--animation-hover);
     left: 62%;
 
 }
+
+@media screen and (max-width: 1439px) {
+.logIn {
+    
+}
+   }
+   @media screen and (max-width: 767px) {
+       .mainInfo {
+        width: 297px;
+        gap: 10px;
+       }
+     
+   }
+   

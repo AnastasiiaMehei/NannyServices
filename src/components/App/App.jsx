@@ -14,6 +14,7 @@ import { useTheme } from '../ThemeButton/ThemeContext';
 
 
 import '../App/App.css'
+import Layout from '../Layout/Layout';
 
 function App() {
   const { theme } = useTheme(); // Отримуємо поточну тему з контексту
@@ -27,6 +28,7 @@ function App() {
   
   return (
     <>
+    <Layout>
     <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -44,6 +46,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      </Layout>
       </>
   )
 }

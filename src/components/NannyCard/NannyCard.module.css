@@ -245,3 +245,57 @@ letter-spacing: -0.01em;
 color:var(--primary-color-white);
 margin-top: 25px;
 }
+@media screen and (max-width: 1439px) {
+.wrapper {
+    width: 600px;
+    flex-direction: column;
+
+}
+.personalInfo {
+    /* flex-direction: column; */
+width: auto;
+}
+.firstLine {
+    flex-direction: column;
+}
+.mainInfo {
+    width: 600px;
+    gap: 2px;
+}
+.divInfo {
+
+}
+.img {
+    width: 107px;
+    height: 103px;
+}
+.avatar {
+    width: 86px;
+    height: 86px;
+}
+.reviews
+ {
+    gap: 0px;
+    margin-top: 18px;
+ }
+}
+   @media screen and (max-width: 767px) {
+.container {
+    gap: 19px;
+}
+    .wrapper {
+        width: 300px;
+    
+    }
+    .info {
+        flex-direction: column;
+        margin-bottom: 63px;   
+    }
+    .mainInfo {
+        width: 280px;
+    }
+    .personalInfoParagraph {
+        padding: 2px 5px;
+    }
+   }
+   
