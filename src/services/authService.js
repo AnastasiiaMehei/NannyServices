@@ -9,7 +9,6 @@ export const registerUser = async (email, password, name) => {
     const user = userCredential.user;
   
     await updateProfile(user, { displayName: name });
-    console.log("Profile updated with displayName:", name);
     return user;
   } catch (error) {
     console.error("Error registering user:", error);
@@ -18,9 +17,7 @@ export const registerUser = async (email, password, name) => {
 };
 export const loginUser = async (email, password) => {
   try {
-    console.log('Attempting to login user:', email); // Додайте для відлагодження
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log('User logged in successfully:', userCredential.user);
     return userCredential.user;
   } catch (error) {
     console.error("Error logging in user:", error);
@@ -31,7 +28,6 @@ export const loginUser = async (email, password) => {
 export const logoutUser = async () => {
   try {
     await signOut(auth);
-    console.log("User logged out successfully");
   } catch (error) {
     console.error("Error logging out:", error);
     throw error;

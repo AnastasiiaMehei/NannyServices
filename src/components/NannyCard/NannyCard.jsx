@@ -68,10 +68,6 @@ const handleToggleFavorite = () => {
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDifference = today.getMonth() - birthDate.getMonth();
-
-    // Якщо місяць поточний менший за місяць народження або
-    // якщо місяць поточний такий самий, але день поточний менший за день народження,
-    // то зменшуємо вік на 1
     if (
       monthDifference < 0 ||
       (monthDifference === 0 && today.getDate() < birthDate.getDate())

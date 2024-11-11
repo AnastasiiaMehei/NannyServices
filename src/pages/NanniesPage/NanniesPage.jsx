@@ -35,7 +35,6 @@ export default function NanniesPage() {
       dbRef,
       (snapshot) => {
         const data = snapshot.val();
-        console.log("Fetched data:", data);
         if (data) {
           const nanniesList = Object.values(data);
           setNannies(nanniesList);

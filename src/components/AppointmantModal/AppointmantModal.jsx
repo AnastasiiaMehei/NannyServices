@@ -7,7 +7,6 @@ import sprite from "../../images/icons-sprite.svg";
 import css from "./AppointmantModal.module.css";
 
 export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
-    console.log('Received in AppointmantModal:', nannyName, nannyAvatar);
     const { user } = useAuth();
     const [formData, setFormData] = useState({
       address: '',
@@ -49,10 +48,7 @@ export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        console.log('Appointment data:', {
-          ...formData,
-          nanny,
-        });
+
         onClose();
         toast.success('Appointment scheduled successfully!');
       } catch (error) {
