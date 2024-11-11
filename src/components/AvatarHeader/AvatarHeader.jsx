@@ -3,7 +3,7 @@ import sprite from "../../images/icons-sprite.svg";
 
 import css from "./AvatarHeader.module.css";
 
-export function AvatarHeader() {
+export function AvatarHeader({ userName }) {
     
   return (
     <div className={css.wrapper} >
@@ -14,7 +14,7 @@ export function AvatarHeader() {
               </svg>
       </div>
       <div className={css.nannyNameDiv}>
-        <p className={css.nannyName}>Name</p>
+      <p className={css.nannyName}>{userName}</p>
       </div>
     </div>
   );

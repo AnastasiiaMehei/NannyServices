@@ -7,7 +7,7 @@ import { ref, onValue } from "firebase/database";
 import Loader from "../../components/Loader/Loader";
 
 import css from "./NanniesPage.module.css";
-import { AppointmantModal } from "../../components/AppointmantModal/AppointmantModal";
+// import { AppointmantModal } from "../../components/AppointmantModal/AppointmantModal";
 
 export default function NanniesPage() {
   const [nannies, setNannies] = useState([]);

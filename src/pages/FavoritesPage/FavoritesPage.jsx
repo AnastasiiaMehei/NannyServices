@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import { db } from "../../services/firebase";
 import { ref, onValue } from "firebase/database";
 import NannyCard from "../../components/NannyCard/NannyCard";
-import PropTypes from 'prop-types';
 import css from "./FavoritesPage.module.css";
-import { v4 as uuidv4 } from 'uuid';
 import Header from "../../components/Header/Header";
 
 export default function FavoritesPage() {
@@ -14,32 +12,28 @@ export default function FavoritesPage() {
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-
-    const dbRef = ref(db, 'nannies');
-    const unsubscribe = onValue(dbRef, (snapshot) => {
+    
+    const dbRef = ref(db);
+    onValue(dbRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        const nanniesArray = Object.entries(data).map(([id, nanny]) => ({
-          ...nanny,
-          id: id || uuidv4(), // Генеруємо ID, якщо він відсутній
-        }));
-        const favoriteNannies = nanniesArray.filter(nanny => favorites.includes(nanny.id));
+        // Перетворюємо об'єкт у масив
+        const allNannies = Object.values(data);
+        const favoriteNannies = allNannies.filter(nanny => favorites.includes(nanny.id));
         setNannies(favoriteNannies);
       } else {
-        setNannies([]); // Встановлюємо порожній масив, якщо даних немає
+        setNannies([]);
       }
       setLoading(false);
     });
-
-    return () => unsubscribe();
   }, []);
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <div className={css.wrapper}>
-        <div className={css.header}><Header /></div>
-        <h2 className={css.title}>Your Favorites</h2>
+      <div className={css.header}><Header /></div>
+      <h2 className={css.title}>Your Favorites</h2>
       <div className={css.nanniesGrid}>
         {nannies && nannies.length > 0 ? (
           nannies.map((nanny) => (
@@ -55,7 +49,3 @@ export default function FavoritesPage() {
     </div>
   );
 }
-
-FavoritesPage.propTypes = {
-  nannies: PropTypes.arrayOf(PropTypes.object),
-};

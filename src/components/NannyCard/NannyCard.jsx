@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import css from "./NannyCard.module.css";
 import { AppointmantModal } from "../AppointmantModal/AppointmantModal";
 
-export default function NannyCard({ nanny = {}, onToggleFavorite }) {
+export default function NannyCard({ nanny = {}, index }) {
   const {
     name,
     avatar_url,
@@ -27,46 +27,35 @@ export default function NannyCard({ nanny = {}, onToggleFavorite }) {
   const { user } = useAuth();
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  useEffect(() => {
-    const checkFavoriteStatus = async () => {
-      if (user && nanny.id) {
-        try {
-          console.log('Checking favorites for user:', user.uid);
-          const favorites = await getFavorites(user.uid);
-          console.log('Favorites:', favorites);
-          setIsFavorite(!!favorites[nanny.id]);
-        } catch (error) {
-          console.error("Error checking favorite status:", error);
-        }
-      }
-    };
+// fav
+useEffect(() => {
+  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  setIsFavorite(favorites.includes( nanny.id));
+}, [nanny.id]);
 
-    checkFavoriteStatus();
-  }, [user, nanny.id]);
+const handleToggleFavorite = () => {
+  if (!user) {
+    toast.error("Please log in to add favorites");
+    return;
+  }
 
-  const handleToggleFavorite = async () => {
-    if (!user) {
-      toast.error("Please log in to add favorites");
-      return;
-    }
-
-    try {
-      if (isFavorite) {
-        await removeFromFavorites(user.uid, nanny.id);
-        setIsFavorite(false);
-        toast.success("Removed from favorites");
-      } else {
-        await addToFavorites(user.uid, nanny.id);
-        setIsFavorite(true);
-        toast.success("Added to favorites");
-      }
-    } catch (error) {
-      console.error("Error toggling favorite:", error);
-      toast.error("Error updating favorites");
-    }
-  };
+  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  if (isFavorite) {
+    const updatedFavorites = favorites.filter(favIndex => favIndex !== nanny.id);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    setIsFavorite(false);
+    toast.success("Removed from favorites");
+  } else {
+    favorites.push(nanny.id);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    setIsFavorite(true);
+    toast.success("Added to favorites");
+  }
+};
 
 
+
+// rev
   const [showReviews, setShowReviews] = useState(false);
 
 

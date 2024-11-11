@@ -1,5 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { auth } from "../../services/firebase"; 
+import { useAuth } from "../../services/AuthContext";
+
 import { logoutUser } from '../../services/authService'; // Імпортуйте logoutUser з authService.js
 import { useEffect, useState } from "react";
 import UserMenu from "../../components/UserMenu/UserMenu.jsx";
@@ -14,6 +16,8 @@ import css from "./Header.module.css";
 import ThemeButton from "../ThemeButton/ThemeButton.jsx";
 import { AvatarHeader } from "../AvatarHeader/AvatarHeader.jsx";
 export default function Header() {
+  const { user } = useAuth(); // Припустимо, що у вас є контекст аутентифікації, який надає користувача
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLogInModalOpen, setIsLogInModalOpen] = useState(false);
   const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
@@ -95,8 +99,8 @@ const isActive = location.pathname === '/nannies';
         <div className={css.btn}>
           {isAuthenticated ? (
             <>
-            <AvatarHeader/>
-            <UserMenu onLogout={handleLogout} />
+          <AvatarHeader userName={user?.displayName || "Guest"} />
+          <UserMenu onLogout={handleLogout} />
             </>
           ) : (
             <AuthNav
