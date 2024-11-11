@@ -14,7 +14,7 @@
     font-size: 14px;
     line-height: 1.28571;
     color: #8a8a89;
-    background: #fff;
+    background: var(--primary-color-white);
     margin-bottom: 10px;
     
 }
@@ -46,7 +46,7 @@ border: none;
 width: 226px;
 padding: 10px;
 border: none;
-background: #fff;
+background: var(--primary-color-white);
 gap: 10px;
 color: var(--primary-color-light-grey);
 display: flex;
@@ -54,7 +54,7 @@ display: flex;
 
 font-size: 18px;
 line-height: 1.11111;
-color: rgba(17, 16, 28, 0.3);
+color: var( --primary-color-light-grey);
 }
 .containerParagraph:hover {color: var(--primary-color-black);
 }

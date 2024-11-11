@@ -75,21 +75,21 @@ color: rgba(17, 16, 28, 0.5);
 font-weight: 500;
 font-size: 12px;
 line-height: 1.33333;
-color: #8a8a89;
+color: var(  --primary-color-light-grey-second)
 }
 .yourNannyName {
     font-family: "Helvetica Neue", sans-serif;
 font-weight: 500;
 font-size: 16px;
 line-height: 1.5;
-color: #11101c;
+color: var( --primary-color-black);
 }
 .nannyName  {
     font-family: "Helvetica Neue", sans-serif;
 font-weight: 500;
 font-size: 16px;
 line-height: 1.5;
-color: #11101c;
+color: var( --primary-color-black);
 }
 .avatar {
     border-radius: 15px;
@@ -116,7 +116,7 @@ font-family: "Helvetica Neue", sans-serif;
 font-weight: 400;
 font-size: 16px;
 line-height: 1.25;
-color: #11101c;
+color: var( --primary-color-black);
 transition: var(--animation-hover);
     cursor: pointer;
 
@@ -127,8 +127,8 @@ transition: var(--animation-hover);
 .iconClock {
     width: 20px;
     height: 20px;
-    stroke: #11101c;
-    fill: #fafafa;
+    stroke: var(--primary-color-black);
+    fill: var( --primary-color-white);
     position: absolute;
     top: 48%;
     right: 12%;
@@ -151,7 +151,7 @@ font-family: "Helvetica Neue", sans-serif;
 font-weight: 400;
 font-size: 16px;
 line-height: 1.25;
-color: #11101c;
+color: var(--primary-color-black);
 transition: var(--animation-hover);
 
 }
@@ -165,7 +165,7 @@ transition: var(--animation-hover);
 font-weight: 400;
 font-size: 16px;
 line-height: 1.25;
-color: #11101c;
+color: var(--primary-color-black);
 transition: var(--animation-hover);
 
 }

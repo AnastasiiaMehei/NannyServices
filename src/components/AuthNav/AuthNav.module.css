@@ -4,7 +4,7 @@
     gap: 8px;
 }
 .logIn {
-    border: 1px solid rgba(251, 251, 251, 0.4);
+    border: var( --primary-border);
     border-radius: 30px;
     padding: 14px 39px; 
     width: 124px; 
@@ -16,7 +16,7 @@
  padding: 14px 40px; 
      width: 168px; 
     height: 48px;
-    border: 1px solid rgba(251, 251, 251, 0.4);
+    border: var( --primary-border);
     background-color: transparent;
 
 }
@@ -25,7 +25,7 @@
         flex-direction: column;
      }
      .logIn {
-        border: 1px solid rgba(251, 251, 251, 0.4);
+        border: var( --primary-border);
         border-radius: 30px;
         padding: 0;
         width: 50px;
@@ -37,7 +37,7 @@
         padding: 0;
         width: 80px;
         height: 48px;
-        border: 1px solid rgba(251, 251, 251, 0.4);
+        border: var( --primary-border);
         background-color: transparent;
     
     }

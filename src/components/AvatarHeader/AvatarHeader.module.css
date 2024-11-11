@@ -12,7 +12,7 @@
     border-radius: 10px;
     width: 40px;
     height: 40px;
-    background: #fbfbfb; 
+    background: var(--primary-color-white); 
 
 }
 .avatar {
@@ -31,5 +31,5 @@ font-weight: 500;
 font-size: 18px;
 line-height: 1.11111;
 letter-spacing: -0.01em;
-color: #fbfbfb;
+color: var(--primary-color-white);
 }
