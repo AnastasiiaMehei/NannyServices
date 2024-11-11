@@ -16,7 +16,7 @@ import css from "./Header.module.css";
 import ThemeButton from "../ThemeButton/ThemeButton.jsx";
 import { AvatarHeader } from "../AvatarHeader/AvatarHeader.jsx";
 export default function Header() {
-  const { user } = useAuth(); // Припустимо, що у вас є контекст аутентифікації, який надає користувача
+  const { user } = useAuth();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLogInModalOpen, setIsLogInModalOpen] = useState(false);
@@ -99,7 +99,7 @@ const isActive = location.pathname === '/nannies';
         <div className={css.btn}>
           {isAuthenticated ? (
             <>
-          <AvatarHeader userName={user?.displayName || "Guest"} />
+          <AvatarHeader userName={user.displayName || "Guest"} />
           <UserMenu onLogout={handleLogout} />
             </>
           ) : (

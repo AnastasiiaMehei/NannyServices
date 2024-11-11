@@ -278,24 +278,32 @@ width: auto;
     gap: 0px;
     margin-top: 18px;
  }
+ /* .mainInfo {
+    margin-top: 247px;
+    margin-left: 30px;
+ } */
 }
    @media screen and (max-width: 767px) {
 .container {
     gap: 19px;
 }
     .wrapper {
-        width: 300px;
-    
+        width: 204px;    
     }
     .info {
         flex-direction: column;
-        margin-bottom: 63px;   
-    }
+        margin-bottom: 91px;    }
     .mainInfo {
-        width: 280px;
+        width: 211px;        margin-top: -23px;
+        margin-left: -3px;
+        flex-direction: column;
     }
     .personalInfoParagraph {
         padding: 2px 5px;
-    }
+        flex-direction: column;
+            }
+            .personalInfo {
+                gap: 6px;
+            }
    }
    

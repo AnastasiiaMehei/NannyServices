@@ -1,13 +1,15 @@
 // authService.js
 import { auth } from './firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "firebase/auth";
+   import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "firebase/auth";
 
 // Реєстрація користувача
 export const registerUser = async (email, password, name) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
+  
     await updateProfile(user, { displayName: name });
+    console.log("Profile updated with displayName:", name);
     return user;
   } catch (error) {
     console.error("Error registering user:", error);

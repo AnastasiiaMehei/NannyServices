@@ -68,9 +68,12 @@ border: none;
     .wrapper {
         margin: 0 auto;
         width: 375px;
+        
     }
     .header {
         padding-left: 0px;
+        /* width: 365px; */
         /* padding: 36px; */
+        margin-bottom: 27px;
     }
   }

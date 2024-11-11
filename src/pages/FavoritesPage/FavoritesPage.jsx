@@ -5,9 +5,13 @@ import { ref, onValue } from "firebase/database";
 import NannyCard from "../../components/NannyCard/NannyCard";
 import css from "./FavoritesPage.module.css";
 import Header from "../../components/Header/Header";
+import FilterNannies from "../../components/FilterNannies/FilterNannies";
 
 export default function FavoritesPage() {
   const [nannies, setNannies] = useState([]);
+  const [sortedNannies, setSortedNannies] = useState([]);
+  const [sortCriteria, setSortCriteria] = useState("all");
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,8 +37,10 @@ export default function FavoritesPage() {
   return (
     <div className={css.wrapper}>
       <div className={css.header}><Header /></div>
-      <h2 className={css.title}>Your Favorites</h2>
-      <div className={css.nanniesGrid}>
+      <div className={css.filterDiv}>
+        <FilterNannies/>
+      </div>
+      <div className={css.likedCardsDiv}>
         {nannies && nannies.length > 0 ? (
           nannies.map((nanny) => (
             <NannyCard 

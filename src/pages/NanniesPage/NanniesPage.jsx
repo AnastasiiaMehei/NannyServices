@@ -12,7 +12,7 @@ import css from "./NanniesPage.module.css";
 export default function NanniesPage() {
   const [nannies, setNannies] = useState([]);
   const [sortedNannies, setSortedNannies] = useState([]);
-  const [sortCriteria, setSortCriteria] = useState("alphabetical-asc");
+  const [sortCriteria, setSortCriteria] = useState("all");
 
   const [visibleNannyCard, setVisibleNannyCard] = useState(3);
   const [loading, setLoading] = useState(true); // Додаємо стан для лоадера
@@ -82,37 +82,47 @@ useEffect(() => {
 
   fetchNannies();
 }, []);
+// sort data
+useEffect(() => {
+  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
-  useEffect(() => {
-    let sorted = [...nannies];
-    switch (sortCriteria) {
-      case 'alphabetical-asc':
-        sorted.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case 'alphabetical-desc':
-        sorted.sort((a, b) => b.name.localeCompare(a.name));
-        break;
-      case 'price-asc':
-        sorted.sort((a, b) => a.price_per_hour - b.price_per_hour);
-        break;
-      case 'price-desc':
-        sorted.sort((a, b) => b.price_per_hour - a.price_per_hour);
-        break;
-      case 'rating-asc':
-        sorted.sort((a, b) => a.rating - b.rating);
-        break;
-      case 'rating-desc':
-        sorted.sort((a, b) => b.rating - a.rating);
-        break;
-      default:
-        break;
-    }
-    setSortedNannies(sorted);
-  }, [sortCriteria, nannies]);
+  let filteredNannies = [...nannies];
+  switch (sortCriteria) {
+    case 'alphabetical-asc':
+      filteredNannies.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case 'alphabetical-desc':
+      filteredNannies.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+    case 'price-asc':
+      filteredNannies.sort((a, b) => a.price_per_hour - b.price_per_hour);
+      break;
+    case 'price-desc':
+      filteredNannies.sort((a, b) => b.price_per_hour - a.price_per_hour);
+      break;
+    case 'rating-asc':
+      filteredNannies.sort((a, b) => a.rating - b.rating);
+      break;
+    case 'rating-desc':
+      filteredNannies.sort((a, b) => b.rating - a.rating);
+      break;
+    case 'liked':
+      filteredNannies = nannies.filter(nanny => favorites.includes(nanny.id));
+      break;
+    case 'not-liked':
+      filteredNannies = nannies.filter(nanny => !favorites.includes(nanny.id));
+      break;
+    case 'all':
+    default:
+      filteredNannies = [...nannies];
+      break;
+  }
+  setSortedNannies(filteredNannies);
+}, [sortCriteria, nannies]);
 
-  const handleSortChange = (newSortCriteria) => {
-    setSortCriteria(newSortCriteria);
-  };
+const handleSortChange = (newSortCriteria) => {
+  setSortCriteria(newSortCriteria);
+};
 
   if (error) {
     return <div>Error loading data: {error.message}</div>;

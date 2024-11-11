@@ -23,7 +23,7 @@ export default function RegistrationModal ({onClose, onRegister}) {
   const onSubmit = async (data) => {
     try {
       console.log('Registration data:', data); // Додайте для відлагодження
-      await registerUser(data.email, data.password);
+      await registerUser(data.email, data.password, data.name);
       toast.success('Successfully registered!');
       onClose();
       navigate('/nannies');
