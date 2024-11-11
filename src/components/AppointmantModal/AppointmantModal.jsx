@@ -116,7 +116,6 @@ export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
                 className={`${css.someInfo} ${css.clock}`}
                type="time"
                   name="time"
-                // placeholder="+00:00"
                 required
               />
           

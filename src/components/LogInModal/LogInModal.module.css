@@ -12,11 +12,10 @@
   }
 .wrapper {
     border-radius: 30px;
-    width: 565px;
+    /* width: 565px; */
     background: var(--primary-color-white);
 /* background: fuchsia; */
-padding: 47px 35px;position: relative;
-display: flex;
+padding: 47px 35px 7px 47px;display: flex;
     justify-content: center;
 
 }
@@ -35,8 +34,14 @@ display: flex;
     height: 20px;
     stroke:var(--primary-color-black);
     position: absolute;
-    top: -1%;
-    left: 466px;
+    top: -2%;
+    left: 419px;
+    transition: var(--animation-hover) ;
+    cursor: pointer;
+}
+.iconClose:hover {
+    stroke: var(--primary-color)
+
 }
 .registrationParagraphDiv {
 display: flex;
@@ -76,6 +81,11 @@ display: flex;
 align-items: center;
 justify-content: center;
 border: none;
+transition: var(--animation-hover) ;
+
+}
+.btn:hover {
+    border: 1px solid var(--primary-color-border);
 }
 
 /* form */
@@ -91,7 +101,14 @@ display: flex;
 .inputs {
     border: 1px solid rgba(17, 16, 28, 0.1);
 border-radius: 12px;
-padding: 16px 261px 16px 18px;}
+padding: 16px 261px 16px 18px;
+transition: var(--animation-hover);
+
+}
+.inputs:hover, .inputs:focus {
+    border: var(--primary-color)
+
+}
 .eye {
     position: relative;
 
@@ -102,7 +119,7 @@ padding: 16px 261px 16px 18px;}
     fill: var(--primary-color-white);
     stroke: var(--primary-color-black);
     position: absolute;
-    top: 61%;
-    left: 78%;
+    top: 58%;
+    left: 62%;
 
 }

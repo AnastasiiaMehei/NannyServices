@@ -1,71 +1,62 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from "../../services/AuthContext";
-import { ref, get } from 'firebase/database'; // Додаємо імпорт ref
-import { db } from '../../services/firebase'; // Додаємо імпорт db
-import { getFavorites } from "../../services/favoritesService";
-import NannyCard from '../../components/NannyCard/NannyCard';
-import Loader from '../../components/Loader/Loader';
-import { toast } from 'react-toastify';
-import css from './FavoritesPage.module.css';
+// FavoritesPage.jsx
+import { useState, useEffect } from "react";
+import { db } from "../../services/firebase";
+import { ref, onValue } from "firebase/database";
+import NannyCard from "../../components/NannyCard/NannyCard";
+import PropTypes from 'prop-types';
+import css from "./FavoritesPage.module.css";
+import { v4 as uuidv4 } from 'uuid';
+import Header from "../../components/Header/Header";
 
 export default function FavoritesPage() {
-  const { user } = useAuth();
-  const [favorites, setFavorites] = useState([]);
+  const [nannies, setNannies] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchFavorites = async () => {
-      if (user) {
-        try {
-          setLoading(true);
-          // Отримуємо список ID обраних нянь
-          const favoritesData = await getFavorites(user.uid);
-          
-          // Отримуємо дані про нянь з основної бази даних
-          const nannyRef = ref(db, 'nannies');
-          const snapshot = await get(nannyRef);
-          const nanniesData = snapshot.val() || {};
-          
-          // Фільтруємо тільки обрані няні
-          const favoriteNannies = Object.keys(favoritesData)
-            .map(id => ({
-              ...nanniesData[id],
-              id // Додаємо id до об'єкту няні
-            }))
-            .filter(Boolean); // Видаляємо null/undefined значення
-          
-          setFavorites(favoriteNannies);
-        } catch (error) {
-          console.error("Error fetching favorites:", error);
-          toast.error("Error loading favorites");
-        } finally {
-          setLoading(false);
-        }
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    console.log('Favorites from localStorage:', favorites);
+
+    const dbRef = ref(db, 'nannies');
+    const unsubscribe = onValue(dbRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const nanniesArray = Object.entries(data).map(([id, nanny]) => ({
+          ...nanny,
+          id: id || uuidv4(), // Генеруємо ID, якщо він відсутній
+        }));
+        const favoriteNannies = nanniesArray.filter(nanny => favorites.includes(nanny.id));
+        setNannies(favoriteNannies);
+      } else {
+        setNannies([]); // Встановлюємо порожній масив, якщо даних немає
       }
-    };
+      setLoading(false);
+    });
 
-    fetchFavorites();
-  }, [user]);
+    return () => unsubscribe();
+  }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
+  if (loading) return <div>Loading...</div>;
 
   return (
-    <div className={css.favoritesPage}>
-      <h2>My Favorite Nannies</h2>
-      {favorites.length === 0 ? (
-        <p>You haven't added any nannies to favorites yet.</p>
-      ) : (
-        <div className={css.nanniesGrid}>
-          {favorites.map((nanny) => (
-            <NannyCard
-              key={nanny.id}
+    <div className={css.wrapper}>
+        <div className={css.header}><Header /></div>
+        <h2 className={css.title}>Your Favorites</h2>
+      <div className={css.nanniesGrid}>
+        {nannies && nannies.length > 0 ? (
+          nannies.map((nanny) => (
+            <NannyCard 
+              key={nanny.id} 
               nanny={nanny}
             />
-          ))}
-        </div>
-      )}
+          ))
+        ) : (
+          <p>No favorite nannies yet.</p>
+        )}
+      </div>
     </div>
   );
 }
+
+FavoritesPage.propTypes = {
+  nannies: PropTypes.arrayOf(PropTypes.object),
+};

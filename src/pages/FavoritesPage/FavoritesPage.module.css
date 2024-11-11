@@ -1,1 +1,16 @@
-  
+.wrapper {
+    position: relative;
+    background-color: aquamarine;
+margin: 0 auto;
+}
+.title {
+    color: red;
+}
+.header {
+    background-color: red;
+    margin: 0 auto;
+    position: absolute;
+    width: 1440px;
+    top: 3%;
+    right: -7%;
+}

@@ -9,15 +9,17 @@
 
   color-scheme: light dark;
   color: #fbfbfb;
-  --background-color: F3F3F3;
+  --background-color: #F3F3F3;
   --primary-color: #f03f3b;
     font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --primary-color-border:2px solid rgba(240, 63, 59, 0.2);
+  --primary-color-border:2px solid #f03f3b33;
   --primary-color-reviewer: rgba(240, 63, 59, 0.2);
   --primary-color-reviewer-name:  #f03f3b;
+  --animation-hover: 250ms ease-in;
+
   
 
 
