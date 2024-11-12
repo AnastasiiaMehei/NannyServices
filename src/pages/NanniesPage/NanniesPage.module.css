@@ -31,6 +31,11 @@ letter-spacing: -0.01em;
 color: var(--primary-color-white);
 border: none;
 }
+.loadMoreBtn {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;
+}
 .header {
     background: var(--primary-color);
     padding: 15px;
