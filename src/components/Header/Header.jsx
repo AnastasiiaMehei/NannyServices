@@ -67,14 +67,14 @@ export default function Header() {
       <div className={css.navigationDiv}>
         <div className={css.navigation}>
           <div className={css.ellipseDiv}>
-            <NavLink to={"/"}>Home</NavLink>
+            <NavLink to={"/"} className={css.activeLink}>Home</NavLink>
  {location.pathname === "/" && (
               <svg className={`${css.iconEllipse} ${css.favorites}`}>
                 <use xlinkHref={`${sprite}#icon-ellipse`}></use>
               </svg>
             )}          </div>
           <div className={css.ellipseDiv}>
-            <NavLink to={"/nannies"}>Nannies</NavLink>
+            <NavLink to={"/nannies"} className={css.activeLink}>Nannies</NavLink>
 
             {/* <svg className={`${css.iconEllipse} ${isActive ? css.active : css.block}`}>
   <use xlinkHref={`${sprite}#icon-ellipse`}></use>
@@ -88,7 +88,7 @@ export default function Header() {
           <div className={css.ellipseDiv}>
             {location.pathname !== "/" && (
               <div className={css.ellipseDiv}>
-                {user && <NavLink to="/favorites">Favorites</NavLink>}
+                {user && <NavLink to="/favorites" className={css.activeLink}>Favorites</NavLink>}
               </div>
             )}
             {location.pathname === "/favorites" && (

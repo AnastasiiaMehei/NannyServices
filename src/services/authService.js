@@ -11,7 +11,6 @@ export const registerUser = async (email, password, name) => {
     await updateProfile(user, { displayName: name });
     return user;
   } catch (error) {
-    console.error("Error registering user:", error);
     throw error;
   }
 };
@@ -20,7 +19,6 @@ export const loginUser = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
   } catch (error) {
-    console.error("Error logging in user:", error);
     throw error;
   }
 };
@@ -29,7 +27,6 @@ export const logoutUser = async () => {
   try {
     await signOut(auth);
   } catch (error) {
-    console.error("Error logging out:", error);
     throw error;
   }
 };

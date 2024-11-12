@@ -19,16 +19,16 @@ export default function RegistrationModal ({onClose, onRegister}) {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
   const onSubmit = async (data) => {
     try {
-      console.log('Registration data:', data); // Додайте для відлагодження
       await registerUser(data.email, data.password, data.name);
       toast.success('Successfully registered!');
       onClose();
       navigate('/nannies');
     } catch (error) {
-      console.error("Registration error:", error);
       toast.error(error.message);
     }
   };
@@ -52,9 +52,7 @@ export default function RegistrationModal ({onClose, onRegister}) {
           onClose();
         }
       };
-      const togglePasswordVisibility = () => {
-        setShowPassword((prevState) => !prevState);
-      };
+    
     
     return (
        <div  className={css.backdrop}  onClick={(e) => e.target === e.currentTarget && onClose()}>
@@ -93,9 +91,9 @@ export default function RegistrationModal ({onClose, onRegister}) {
         </div>
         <div>
           <input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             placeholder="Password"
-            {...register('password')}
+            {...register('password', { required: 'Password is required' })}
             className={`${css.inputs} ${css.eye}`}
             required
           />

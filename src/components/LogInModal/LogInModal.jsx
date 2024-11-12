@@ -32,7 +32,6 @@ export default function LogInModal({ onClose }) {
       onClose();
       navigate('/nannies');
     } catch (error) {
-      console.error("Login error:", error);
       toast.error(error.message);
     }
   };

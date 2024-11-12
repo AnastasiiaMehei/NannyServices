@@ -157,3 +157,6 @@ flex-direction: column; }
     flex-direction: row;
 }
 }
+.activeLink:hover{
+border: 1px solid var(--background-color);
+}

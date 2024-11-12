@@ -46,7 +46,6 @@ export default function NanniesPage() {
         }
       },
       (error) => {
-        console.error("Error fetching nannies:", error);
         setError(error);
         setLoading(false); // Встановлюємо loading в false у випадку помилки
 
@@ -74,7 +73,6 @@ useEffect(() => {
       });
       return unsubscribe;
     } catch (error) {
-      console.error("Error fetching nannies:", error);
       setIsLoading(false);
     }
   };

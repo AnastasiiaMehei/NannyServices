@@ -51,11 +51,9 @@ export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
     };
     const onSubmit = async (data) => {
       try {
-        console.log('Appointment data:', data);
         onClose();
         toast.success('Appointment scheduled successfully!');
       } catch (error) {
-        console.error('Error scheduling appointment:', error);
         toast.error('Failed to schedule appointment');
       }
     };

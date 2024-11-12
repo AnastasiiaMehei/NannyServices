@@ -10,7 +10,6 @@ export const getFavorites = async (userId) => {
     const snapshot = await get(favoritesRef);
     return snapshot.val() || {};
   } catch (error) {
-    console.error('Error getting favorites:', error);
     return {};
   }
 };
@@ -22,7 +21,6 @@ export const addToFavorites = async (userId, nannyId) => {
     const favoriteRef = ref(db, `users/${userId}/favorites/${nannyId}`);
     await set(favoriteRef, true);
   } catch (error) {
-    console.error('Error adding to favorites:', error);
     throw error;
   }
 };
@@ -34,7 +32,6 @@ export const removeFromFavorites = async (userId, nannyId) => {
     const favoriteRef = ref(db, `users/${userId}/favorites/${nannyId}`);
     await remove(favoriteRef);
   } catch (error) {
-    console.error('Error removing from favorites:', error);
     throw error;
   }
 };
