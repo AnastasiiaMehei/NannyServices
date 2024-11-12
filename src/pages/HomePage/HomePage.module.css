@@ -28,9 +28,9 @@ position: absolute;
     border-bottom: 1px solid rgba(251, 251, 251, 0.4);
 }
 .modal {
-    position: fixed;
-    top: 70%;
-    right: 10%;
+    position: absolute;
+    top: 76%;
+    right: 15%;
 }
 .container {
     display: flex;
@@ -102,8 +102,8 @@ margin-bottom: 64px;
 width: 618px;
 }
 .modal {
-    top: 50%;
-    right: 48%;
+    top: 77%;
+    right: 19%;
 }
 .mainInfo {
     margin-top: 236px;
@@ -122,8 +122,8 @@ width: 618px;
             font-size: 27px;
            }
            .modal {
-            top: 48%;
-            right: 27%;
+            top: 69%;
+            right: 16%;
     
            }
            .title {
