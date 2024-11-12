@@ -142,6 +142,8 @@ export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
              <input
             className={css.comment}
             name="comment"
+            placeholder="Comment"
+
             id=""
             {...register('comment')}
 
