@@ -1,4 +1,3 @@
-// FavoritesPage.jsx
 import { useState, useEffect } from "react";
 import { db } from "../../services/firebase";
 import { ref, onValue } from "firebase/database";
@@ -9,21 +8,19 @@ import FilterNannies from "../../components/FilterNannies/FilterNannies";
 
 export default function FavoritesPage() {
   const [nannies, setNannies] = useState([]);
-  const [sortedNannies, setSortedNannies] = useState([]);
-  const [sortCriteria, setSortCriteria] = useState("all");
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+
     const dbRef = ref(db);
     onValue(dbRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        // Перетворюємо об'єкт у масив
         const allNannies = Object.values(data);
-        const favoriteNannies = allNannies.filter(nanny => favorites.includes(nanny.id));
+        const favoriteNannies = allNannies.filter((nanny) =>
+          favorites.includes(nanny.id)
+        );
         setNannies(favoriteNannies);
       } else {
         setNannies([]);
@@ -32,20 +29,34 @@ export default function FavoritesPage() {
     });
   }, []);
 
+  const handleRemoveFavorite = (nannyId) => {
+    setNannies((prevNannies) =>
+      prevNannies.filter((nanny) => nanny.id !== nannyId)
+    );
+
+    const updatedFavorites = JSON.parse(
+      localStorage.getItem("favorites") || "[]"
+    ).filter((id) => id !== nannyId);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
     <div className={css.wrapper}>
-      <div className={css.header}><Header /></div>
+      <div className={css.header}>
+        <Header />
+      </div>
       <div className={css.filterDiv}>
-        <FilterNannies/>
+        <FilterNannies />
       </div>
       <div className={css.likedCardsDiv}>
         {nannies && nannies.length > 0 ? (
           nannies.map((nanny) => (
-            <NannyCard 
-              key={nanny.id} 
+            <NannyCard
+              key={nanny.id}
               nanny={nanny}
+              onRemoveFavorite={handleRemoveFavorite}
             />
           ))
         ) : (

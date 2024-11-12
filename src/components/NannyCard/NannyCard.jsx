@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import sprite from "../../images/icons-sprite.svg";
-import { getFavorites, addToFavorites, removeFromFavorites } from "../../services/favoritesService";
+import {
+  getFavorites,
+  addToFavorites,
+  removeFromFavorites,
+} from "../../services/favoritesService";
 import { useAuth } from "../../services/AuthContext";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 import css from "./NannyCard.module.css";
 import { AppointmantModal } from "../AppointmantModal/AppointmantModal";
 
-export default function NannyCard({ nanny = {}, index }) {
+export default function NannyCard({ nanny = {}, onRemoveFavorite }) {
   const {
     name,
     avatar_url,
@@ -21,43 +25,45 @@ export default function NannyCard({ nanny = {}, index }) {
     about,
     characters,
     rating,
-    id
+    id,
   } = nanny;
 
   const { user } = useAuth();
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-// fav
-useEffect(() => {
-  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-  setIsFavorite(favorites.includes( nanny.id));
-}, [nanny.id]);
 
-const handleToggleFavorite = () => {
-  if (!user) {
-    toast.error("Please log in to add favorites");
-    return;
-  }
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    setIsFavorite(favorites.includes(nanny.id));
+  }, [nanny.id]);
 
-  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-  if (isFavorite) {
-    const updatedFavorites = favorites.filter(favIndex => favIndex !== nanny.id);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    setIsFavorite(false);
-    toast.success("Removed from favorites");
-  } else {
-    favorites.push(nanny.id);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    setIsFavorite(true);
-    toast.success("Added to favorites");
-  }
-};
+  const handleToggleFavorite = () => {
+    if (!user) {
+      toast.error("Please log in to add favorites");
+      return;
+    }
 
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    if (isFavorite) {
+      const updatedFavorites = favorites.filter(
+        (favIndex) => favIndex !== nanny.id
+      );
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      setIsFavorite(false);
+      toast.success("Removed from favorites");
+      if (onRemoveFavorite) {
+        onRemoveFavorite(nanny.id);
+      }
+    } else {
+      favorites.push(nanny.id);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      setIsFavorite(true);
+      toast.success("Added to favorites");
+    }
+  };
 
-
-// rev
+  // rev
   const [showReviews, setShowReviews] = useState(false);
-
 
   const handleReadMoreClick = () => {
     setShowReviews(true);
@@ -79,18 +85,19 @@ const handleToggleFavorite = () => {
   }
 
   const age = calculateAge(birthday);
-// appointmant modal
-const handleAppointmentClick = () => {
-  if (!user) {
-    toast.error("Please log in to make an appointment");
-    return;
-  }
-  setShowAppointmentModal(true);
-};
+  // appointmant modal
+  const handleAppointmentClick = () => {
+    if (!user) {
+      toast.error("Please log in to make an appointment");
+      return;
+    }
+    setShowAppointmentModal(true);
+  };
 
-const handleCloseModal = () => {
-  setShowAppointmentModal(false);
-};
+  const handleCloseModal = () => {
+    setShowAppointmentModal(false);
+  };
+
 
   return (
     <div className={css.wrapper}>
@@ -129,7 +136,11 @@ const handleCloseModal = () => {
             </div>
             <div onClick={handleToggleFavorite}>
               <svg className={css.iconLike}>
-                <use xlinkHref={`${sprite}#icon-${isFavorite ? 'redLike' : 'blackLike'}`}></use>
+                <use
+                  xlinkHref={`${sprite}#icon-${
+                    isFavorite ? "redLike" : "blackLike"
+                  }`}
+                ></use>
               </svg>
             </div>
           </div>
@@ -150,14 +161,12 @@ const handleCloseModal = () => {
           <div className={css.personalInfoParagraph}>
             <p>Characters:</p>
             <div className={css.details}>
-  {characters.map((character, index) => {
-    const capitalizedCharacter = character.charAt(0).toUpperCase() + character.slice(1);
-    return (
-      <span key={index}>{`${capitalizedCharacter}, `}</span>
-    );
-  })}
-</div>
-
+              {characters.map((character, index) => {
+                const capitalizedCharacter =
+                  character.charAt(0).toUpperCase() + character.slice(1);
+                return <span key={index}>{`${capitalizedCharacter}, `}</span>;
+              })}
+            </div>
           </div>
           <div className={css.personalInfoParagraph}>
             <p>Education:</p>
@@ -195,7 +204,8 @@ const handleCloseModal = () => {
                         </svg>
                         <p>{rating}</p>
                       </div>
-                    </div>
+
+                      </div>
                   </div>
                   <div>
                     <p className={css.reviewComment}>{comment}</p>
@@ -204,19 +214,23 @@ const handleCloseModal = () => {
               );
             })}
             <div>
-              <button className={css.appointmentBtn} type="submit" onClick={handleAppointmentClick}>
+              <button
+                className={css.appointmentBtn}
+                type="submit"
+                onClick={handleAppointmentClick}
+              >
                 Make an appointment
               </button>
             </div>
             {showAppointmentModal && (
-        <>
-          <AppointmantModal 
-            onClose={handleCloseModal}
-            nannyName={name}
-            nannyAvatar={avatar_url}
-          />
-        </>
-      )}
+              <>
+                <AppointmantModal
+                  onClose={handleCloseModal}
+                  nannyName={name}
+                  nannyAvatar={avatar_url}
+                />
+              </>
+            )}
           </div>
         )}
       </div>

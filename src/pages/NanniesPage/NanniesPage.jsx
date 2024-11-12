@@ -125,6 +125,7 @@ const handleSortChange = (newSortCriteria) => {
     return <div>Error loading data: {error.message}</div>;
   }
 
+
   return (
     <div className={css.wrapper}>
       <div className={css.header}>
