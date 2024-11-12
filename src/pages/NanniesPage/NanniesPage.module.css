@@ -2,8 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* position: relative; */
-    /* margin-left: 100px; */
+
     margin-bottom: 24px;
 
 }
@@ -11,7 +10,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* margin-bottom: 45px; */
     gap: 45px;
 }
 .loadMoreDiv {
@@ -37,8 +35,7 @@ border: none;
     background: var(--primary-color);
     padding: 15px;
     margin-bottom: 60px;
-    /* position: absolute; */
-    /* left: 10%; */
+
     padding-left: 340px;
 }
 @media screen and (max-width: 1439px) {
@@ -48,7 +45,7 @@ border: none;
     }
     .header{
      padding-left: 0px;
-     /* padding: 36px; */
+
     }
 .divInfo {
     gap: 14px;
@@ -72,8 +69,7 @@ border: none;
     }
     .header {
         padding-left: 0px;
-        /* width: 365px; */
-        /* padding: 36px; */
+
         margin-bottom: 27px;
     }
   }

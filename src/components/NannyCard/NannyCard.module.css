@@ -23,7 +23,6 @@ justify-content: center;
     border-radius: 15px;
 width: 96px;
 height: 96px;
-/* background: #e0e0e0, url("avatar_url"); */
 background-position: center;
 background-size: contain;
 
@@ -40,7 +39,6 @@ background-size: contain;
     justify-content: space-between;
 }
 .nameDiv {
-    /* width: 201px; */
 height: 56px;
 display: flex;
 flex-direction: column;
@@ -66,9 +64,7 @@ gap: 50px;
 .info {
     display: flex;
     flex-direction: row;
-    /* width: 423px; */
 height: 24px;
-/* gap: 10px; */
 }
 .locationDiv {
     display: flex;
@@ -127,7 +123,6 @@ color: var(--primary-color-black);
     height: 22px;
     stroke: var(--primary-color-black);
 }
-/* personal information */
 .personalInfo {
     display: flex;
     flex-direction: row;
@@ -178,9 +173,7 @@ padding: 0;
    
         color: var(--primary-color);
 }
-/* reviews */
 .reviews {
-    /* width: 482px; */
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -191,7 +184,6 @@ padding: 0;
 .reviewDiv {
     display: flex;
     flex-direction: row;
-    /* width: 111px; */
     align-items: center;
     gap: 16px;
     margin-bottom: 16px;
@@ -262,7 +254,6 @@ margin-top: 25px;
 
 }
 .personalInfo {
-    /* flex-direction: column; */
 width: auto;
 }
 .firstLine {
@@ -271,9 +262,6 @@ width: auto;
 .mainInfo {
     width: 600px;
     gap: 2px;
-}
-.divInfo {
-
 }
 .img {
     width: 107px;
@@ -288,10 +276,7 @@ width: auto;
     gap: 0px;
     margin-top: 18px;
  }
- /* .mainInfo {
-    margin-top: 247px;
-    margin-left: 30px;
- } */
+
 }
    @media screen and (max-width: 767px) {
 .container {

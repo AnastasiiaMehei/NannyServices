@@ -38,7 +38,7 @@ export default function NanniesPage() {
         if (data) {
           const nanniesList = Object.values(data);
           setNannies(nanniesList);
-          setLoading(false); // Встановлюємо loading в false після отримання даних
+          setLoading(false);
 
         } else {
           setNannies([]);
@@ -47,7 +47,7 @@ export default function NanniesPage() {
       },
       (error) => {
         setError(error);
-        setLoading(false); // Встановлюємо loading в false у випадку помилки
+        setLoading(false); 
 
       }
     );

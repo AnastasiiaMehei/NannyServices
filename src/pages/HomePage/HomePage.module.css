@@ -8,9 +8,7 @@ width: 1376px;
 height: 736px;
 background: var(--primary-color);
 position: relative;
-/* padding-top: 30px;
-padding-right: 95px;
-padding-left: 95px; */
+
 }
 .header {
 position: absolute;

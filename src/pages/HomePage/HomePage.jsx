@@ -7,10 +7,10 @@ import sprite from "../../images/icons-sprite.svg";
 
 import css from "./HomePage.module.css";
 export default function HomePage() {
-  const navigate = useNavigate(); // Використовуйте useNavigate
+  const navigate = useNavigate(); 
 
   const handleGetStartedClick = () => {
-    navigate('/nannies'); // Перенаправити на NanniesPage
+    navigate('/nannies'); 
   };
   return (
     <>

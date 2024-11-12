@@ -12,9 +12,7 @@
   }
 .wrapper {
     border-radius: 30px;
-    /* width: 565px; */
     background: var(--primary-color-white);
-/* background: fuchsia; */
 padding: 47px 35px 7px 47px;display: flex;
     justify-content: center;
 
@@ -95,9 +93,6 @@ transition: var(--animation-hover) ;
 display: flex;
     flex-direction: column;
     gap: 15px;
-}
-.inputsDiv {
-
 }
 .inputs {
     border: 1px solid rgba(17, 16, 28, 0.1);

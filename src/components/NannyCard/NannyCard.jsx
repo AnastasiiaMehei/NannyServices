@@ -61,14 +61,11 @@ export default function NannyCard({ nanny = {}, onRemoveFavorite }) {
       toast.success("Added to favorites");
     }
   };
-
-  // rev
   const [showReviews, setShowReviews] = useState(false);
 
   const handleReadMoreClick = () => {
     setShowReviews(true);
   };
-  // Функція для обчислення віку
   function calculateAge(birthday) {
     const birthDate = new Date(birthday);
     const today = new Date();
@@ -85,7 +82,6 @@ export default function NannyCard({ nanny = {}, onRemoveFavorite }) {
   }
 
   const age = calculateAge(birthday);
-  // appointmant modal
   const handleAppointmentClick = () => {
     if (!user) {
       toast.error("Please log in to make an appointment");
