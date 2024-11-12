@@ -37,9 +37,14 @@ line-height: 1.11111;
 padding: 16px 18px;
 border: none;
 }
-.container:hover{
-    border: none;
+.buttonDiv:hover {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;
 }
+/* .container:hover{
+    border: none;
+} */
 
 .container {
     border-radius: 14px;
@@ -56,5 +61,7 @@ font-size: 18px;
 line-height: 1.11111;
 color: var( --primary-color-light-grey);
 }
-.containerParagraph:hover {color: var(--primary-color-black);
+.containerParagraph:hover,
+.containerParagraph:focus {
+    color: var(--primary-color);
 }

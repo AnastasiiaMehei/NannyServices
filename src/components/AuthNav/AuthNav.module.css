@@ -11,6 +11,10 @@
     height: 48px;
     background-color: transparent;
 }
+.logIn:hover, .registration:hover {
+    background-color: var(--background-color);
+    color: var( --primary-color);
+}
 .registration {
     border-radius: 30px;
  padding: 14px 40px; 

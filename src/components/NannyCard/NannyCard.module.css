@@ -161,6 +161,7 @@ text-align: justify;
     display: flex;
 
 }
+
 .readMoreBtn {
 font-weight: 500;
 font-size: 16px;
@@ -172,6 +173,10 @@ text-align: justify;
 border: none;
 background-color: transparent;
 padding: 0;
+}
+.readMoreBtn:hover {
+   
+        color: var(--primary-color);
 }
 /* reviews */
 .reviews {
@@ -244,6 +249,11 @@ line-height: 1.25;
 letter-spacing: -0.01em;
 color:var(--primary-color-white);
 margin-top: 25px;
+}
+.appointmentBtn:hover {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;
 }
 @media screen and (max-width: 1439px) {
 .wrapper {

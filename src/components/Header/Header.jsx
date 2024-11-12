@@ -1,8 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { auth } from "../../services/firebase"; 
+import { auth } from "../../services/firebase";
 import { useAuth } from "../../services/AuthContext";
-
-import { logoutUser } from '../../services/authService'; // Імпортуйте logoutUser з authService.js
+import { logoutUser } from "../../services/authService"; 
 import { useEffect, useState } from "react";
 import UserMenu from "../../components/UserMenu/UserMenu.jsx";
 import { AuthNav } from "../../components/AuthNav/AuthNav.jsx";
@@ -21,8 +20,8 @@ export default function Header() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLogInModalOpen, setIsLogInModalOpen] = useState(false);
   const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
-const location = useLocation();
-const isActive = location.pathname === '/nannies';
+  const location = useLocation();
+  const isActive = location.pathname === "/nannies";
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -62,44 +61,48 @@ const isActive = location.pathname === '/nannies';
   return (
     <div className={css.wrapper}>
       <div className={css.themeButton}>
-      <ThemeButton/>
+        <ThemeButton />
         <a className={css.logo}>Nanny.Services</a>
       </div>
       <div className={css.navigationDiv}>
         <div className={css.navigation}>
           <div className={css.ellipseDiv}>
-          <NavLink to={"/"}>Home</NavLink>
-
-          </div>
+            <NavLink to={"/"}>Home</NavLink>
+ {location.pathname === "/" && (
+              <svg className={`${css.iconEllipse} ${css.favorites}`}>
+                <use xlinkHref={`${sprite}#icon-ellipse`}></use>
+              </svg>
+            )}          </div>
           <div className={css.ellipseDiv}>
-          <NavLink to={"/nannies"}>Nannies</NavLink>
-      {/* <svg className={`${css.iconEllipse} ${isActive ? css.active : css.block}`}>
+            <NavLink to={"/nannies"}>Nannies</NavLink>
+
+            {/* <svg className={`${css.iconEllipse} ${isActive ? css.active : css.block}`}>
   <use xlinkHref={`${sprite}#icon-ellipse`}></use>
 </svg> */}
+ {location.pathname === "/nannies" && (
+              <svg className={`${css.iconEllipse} ${css.favorites}`}>
+                <use xlinkHref={`${sprite}#icon-ellipse`}></use>
+              </svg>
+            )}
           </div>
-<div className={css.ellipseDiv}>
-    
-                     {location.pathname !== '/' && (
-        <div className={css.ellipseDiv}>
-          {user && (          <NavLink to="/favorites">Favorites</NavLink>
-)}
-
-        </div>
-      )}
-        {location.pathname === '/favorites' && (
-        <svg className={`${css.iconEllipse} ${css.favorites}`}>
-          <use xlinkHref={`${sprite}#icon-ellipse`}></use>
-        </svg>
-      )}
-      
-
-</div>
+          <div className={css.ellipseDiv}>
+            {location.pathname !== "/" && (
+              <div className={css.ellipseDiv}>
+                {user && <NavLink to="/favorites">Favorites</NavLink>}
+              </div>
+            )}
+            {location.pathname === "/favorites" && (
+              <svg className={`${css.iconEllipse} ${css.favorites}`}>
+                <use xlinkHref={`${sprite}#icon-ellipse`}></use>
+              </svg>
+            )}
+          </div>
         </div>
         <div className={css.btn}>
           {isAuthenticated ? (
             <>
-          <AvatarHeader userName={user.displayName || "Guest"} />
-          <UserMenu onLogout={handleLogout} />
+              <AvatarHeader userName={user.displayName || "Guest"} />
+              <UserMenu onLogout={handleLogout} />
             </>
           ) : (
             <AuthNav

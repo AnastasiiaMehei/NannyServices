@@ -90,8 +90,9 @@ border: none;
 
 }
 .btn:hover {
-    border: 1px solid var(--primary-color-border);
-}
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: transparent;}
 
 /* form */
 .form {
