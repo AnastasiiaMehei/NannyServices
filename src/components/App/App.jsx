@@ -41,9 +41,9 @@ function App() {
                 </PrivateRoute>
               }
             /> */}
-{/* <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+<Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
   <Route path="/favorites" element={<FavoritesPage />} />
-</Route> */}
+</Route>
 
             <Route path="*" element={<NotFound />} />
             </Routes>

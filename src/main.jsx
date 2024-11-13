@@ -10,7 +10,6 @@ import App from './components/App/App';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
     <ThemeProvider>
     <AuthProvider>
 
@@ -18,6 +17,5 @@ createRoot(document.getElementById('root')).render(
       </AuthProvider>
 
       </ThemeProvider>
-    </BrowserRouter>
   </StrictMode>
 );
