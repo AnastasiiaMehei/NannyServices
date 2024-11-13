@@ -6,7 +6,6 @@ function PrivateRoute({ isAuthenticated }) {
 }
 
 PrivateRoute.propTypes = {
-  children: PropTypes.node.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
 };
 
