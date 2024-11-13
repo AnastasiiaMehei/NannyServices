@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import { useEffect } from "react";
 
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Loader from "../Loader/Loader";
 import NotFound from "../../pages/NotFound/NotFound";
@@ -17,7 +17,7 @@ import "../App/App.css";
 import Layout from "../Layout/Layout";
 
 function App() {
-  const { theme } = useTheme(); // Отримуємо поточну тему з контексту
+  const { theme } = useTheme(); 
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -26,26 +26,32 @@ function App() {
   const isAuthenticated = true;
 
   return (
-    <>
+      <Router>
       <Layout>
         <Suspense fallback={<Loader />}>
-          <Routes>
+        <Routes>
+
             <Route path="/" element={<HomePage />} />
             <Route path="/nannies" element={<NanniesPage />}></Route>
-            <Route
+            {/* <Route
               path="/favorites"
               element={
-                <PrivateRoute isAuthenticated={isAuthenticated}>
+                // <PrivateRoute isAuthenticated={isAuthenticated}>
                   <FavoritesPage />
                 </PrivateRoute>
               }
-            />
+            /> */}
+{/* <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+  <Route path="/favorites" element={<FavoritesPage />} />
+</Route> */}
 
             <Route path="*" element={<NotFound />} />
-          </Routes>
+            </Routes>
+
         </Suspense>
       </Layout>
-    </>
+      </Router>
+
   );
 }
 
