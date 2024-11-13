@@ -12,7 +12,7 @@
 }
  .container {
     border-radius: 30px;
-    width: 481px;
+    width: 483px;
     background: var(--primary-color-white);
     padding: 50px 31px;
     position: relative;
@@ -183,6 +183,7 @@ letter-spacing: -0.01em;
 color: var(color);
 border: none;
 transition: var(--animation-hover) ;
+margin-top: 24px;
 }
 .btn:hover {
 
@@ -190,3 +191,10 @@ transition: var(--animation-hover) ;
         color: var(--primary-color);
         background-color: transparent;
     }
+
+    .errorMessage {
+display: flex;
+flex-direction: column;    }
+.error {
+    color: red;
+}

@@ -1,34 +1,28 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../services/AuthContext";
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { toast } from "react-toastify";
 
 import sprite from "../../images/icons-sprite.svg";
 
 import css from "./AppointmantModal.module.css";
-const schema = yup.object().shape({
-  address: yup.string().required('Address is required'),
-  phone: yup.string().required('Phone is required').matches(/^\+?\d{10,15}$/, 'Phone number is not valid'),
-  childAge: yup.number().required('Child age is required').min(0, 'Age must be a positive number'),
-  time: yup.string().required('Time is required'),
-  parentName: yup.string().required('Parent name is required'),
-  comment: yup.string().max(500, 'Comment must be less than 500 characters'),
+const validationSchema = Yup.object().shape({
+  address: Yup.string().required("Address is required"),
+  phone: Yup.string()
+    .required("Phone is required")
+    .matches(/^\+?\d{10,15}$/, "Phone number is not valid"),
+  childAge: Yup.number()
+    .required("Child age is required")
+    .min(0, "Age must be a positive number"),
+  time: Yup.string().required("Time is required"),
+  parentName: Yup.string().required("Parent name is required"),
+  comment: Yup.string().max(500, "Comment must be less than 500 characters"),
 });
+
 export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
     const { user } = useAuth();
-    const { register, handleSubmit, formState: { errors } } = useForm({
-      resolver: yupResolver(schema),
-    });
-    const [formData, setFormData] = useState({
-      address: '',
-      phone: '',
-      childAge: '',
-      time: '',
-      parentName: '',
-      comment: ''
-    });
   
     useEffect(() => {
       const handleKeyDown = (e) => {
@@ -49,14 +43,14 @@ export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
         onClose();
       }
     };
-    const onSubmit = async (data) => {
-      try {
-        onClose();
-        toast.success('Appointment scheduled successfully!');
-      } catch (error) {
-        toast.error('Failed to schedule appointment');
-      }
+    const handleSubmit = (values, actions) => {
+      console.log("Appointment request payload:", values);
+      // Here you can dispatch an action or make an API call
+      toast.success("Appointment scheduled successfully!");
+      actions.resetForm();
+      onClose();
     };
+
   return (
     <div className={css.backdrop} onClick={handleBackdropClick}>
 
@@ -87,7 +81,7 @@ export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
             <p className={css.nannyName}>{nannyName}</p>
             </div>
         </div>
-        <form className={css.form}  onSubmit={handleSubmit}> 
+        {/* <form className={css.form}  onSubmit={handleSubmit}> 
           <div className={css.someInfoDiv}>
             <input
               className={css.someInfo}
@@ -151,9 +145,111 @@ export function AppointmantModal({ onClose, nannyName, nannyAvatar  }) {
                       {errors.comment && <p className={css.error}>{errors.comment.message}</p>}
 
           </div>
-        </form>
-        <button className={css.btn} type="submit">Send</button>
+        </form> */}
+{/*         
+        <button className={css.btn} type="submit">Send</button> */}
+ <Formik
+          initialValues={{
+            address: "",
+            phone: "",
+            childAge: "",
+            time: "",
+            parentName: "",
+            comment: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          <Form className={css.form}>
+            <div className={css.someInfoDiv}>
+           <div  className={css.errorMessage}>
+           <Field
+                className={css.someInfo}
+                type="text"
+                name="address"
+                placeholder="Address"
+              />
+              <ErrorMessage
+                className={css.error}
+                name="address"
+                component="p"
+              />
+           </div>
+           <div className={css.errorMessage}>
+              <Field
+                className={css.someInfo}
+                type="tel"
+                name="phone"
+                placeholder="+380"
+              />
+              <ErrorMessage
+                className={css.error}
+                name="phone"
+                component="p"
+              />
+           </div>
+           <div className={css.errorMessage}>
 
+              <Field
+                className={css.someInfo}
+                type="text"
+                name="childAge"
+                placeholder="Child's age"
+              />
+              <ErrorMessage
+                className={css.error}
+                name="childAge"
+                component="p"
+              />
+           </div>
+           <div className={css.errorMessage}>
+
+              <Field
+                className={`${css.someInfo} ${css.clock}`}
+                type="time"
+                name="time"
+              />
+              <ErrorMessage
+                className={css.error}
+                name="time"
+                component="p"
+              />
+           </div>
+           <div className={css.errorMessage}>
+
+              <Field
+                className={css.parents}
+                type="text"
+                name="parentName"
+                placeholder="Father's or mother's name"
+              />
+              <ErrorMessage
+                className={css.error}
+                name="parentName"
+                component="p"
+              />
+           </div>
+           <div className={css.errorMessage}>
+
+              <Field
+                className={css.comment}
+                name="comment"
+                placeholder="Comment"
+                as="textarea"
+              />
+              <ErrorMessage
+                className={css.error}
+                name="comment"
+                component="p"
+              />
+                         </div>
+
+            </div>
+            <button className={css.btn} type="submit">
+              Send
+            </button>
+          </Form>
+        </Formik>
       </div>
     </div>
   );
