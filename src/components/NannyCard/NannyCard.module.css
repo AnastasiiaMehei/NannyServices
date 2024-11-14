@@ -122,6 +122,7 @@ color: var(--primary-color-black);
     width: 26px;
     height: 22px;
     stroke: var(--primary-color-black);
+    cursor: pointer;
 }
 .personalInfo {
     display: flex;
