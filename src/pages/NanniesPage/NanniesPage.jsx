@@ -7,7 +7,7 @@ import { ref, onValue } from "firebase/database";
 import Loader from "../../components/Loader/Loader";
 
 import css from "./NanniesPage.module.css";
-// import { AppointmantModal } from "../../components/AppointmantModal/AppointmantModal";
+
 
 export default function NanniesPage() {
   const [nannies, setNannies] = useState([]);
@@ -15,15 +15,15 @@ export default function NanniesPage() {
   const [sortCriteria, setSortCriteria] = useState("all");
 
   const [visibleNannyCard, setVisibleNannyCard] = useState(3);
-  const [loading, setLoading] = useState(true); // Додаємо стан для лоадера
+  const [loading, setLoading] = useState(true); 
 
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null); // Додаємо стан для помилок
+  const [error, setError] = useState(null);
 
 
 
   const handleLoadMore = () => {
-    setLoading(true); // Встановлюємо loading в true перед запитом
+    setLoading(true); 
 
     setVisibleNannyCard((prev) => prev + 3);
   };

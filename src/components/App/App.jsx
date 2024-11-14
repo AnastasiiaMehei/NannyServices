@@ -26,7 +26,7 @@ function App() {
   const isAuthenticated = true;
 
   return (
-    <Router>
+    <Router basename="/">
       <Layout>
         <Suspense fallback={<Loader />}>
           <Routes>
